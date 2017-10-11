@@ -1,9 +1,31 @@
 #!/usr/bin/env python
 
+defaults = [
+		[ '.upload.tool', 'esptool' ],
+		[ '.upload.speed', '115200' ],
+		[ '.upload.resetmethod', 'ck' ],
+		[ '.upload.maximum_size', '434160' ],
+		[ '.upload.maximum_data_size', '81920' ],
+		[ '.upload.wait_for_upload_port', 'true' ],
+		[ '.serial.disableDTR', 'true' ],
+		[ '.serial.disableRTS', 'true' ],
+		[ '.build.mcu', 'esp8266' ],
+		[ '.build.f_cpu', '80000000L' ],
+		[ '.build.core', 'esp8266' ],
+		[ '.build.variant', 'generic' ],
+		[ '.build.flash_mode', 'qio' ],
+		[ '.build.spiffs_pagesize', '256' ],
+		[ '.build.debug_port', '' ],
+		[ '.build.debug_level', '' ],
+	]
+
 boards = [
 	{
 		'short': 'generic',
 		'name': 'Generic ESP8266 Module',
+		'opts': {
+			'.build.board': 'ESP8266_ESP01',
+			}
 	},
 	{
 		'short': 'esp8285',
@@ -103,7 +125,8 @@ boards = [
 	},
 	]
 
-serial = [
+
+uploadspeed = [
 		{ 'speed': 115200,	'os': [ '' ] }, 
 		{ 'speed': 9600,	'os': [ '' ] },
 		{ 'speed': 57600,	'os': [ '' ] },
@@ -129,15 +152,22 @@ print 'menu.LwIPVariant=lwIP Variant'
 print 'menu.lwIP=lwIP Build'
 print ''
 
-for b in boards:
+for board in boards:
 	print '##############################################################'
-	short=b['short']
-	print short + '.name=' + b['name']
-	print short + '.upload.tool=esptool'
+	short=board['short']
+	print short + '.name=' + board['name']
+
+	for default in defaults:
+		if not ('opts' in board) or not (default[0] in board['opts']):
+			print short + default[0] + '=' + default[1]
+
+	if 'opts' in board:
+		for opt in board['opts']:
+			print short + opt + '=' + board['opts'][opt]
 	
-	for s in serial:
-		for os in s['os']:
-			speed=s['speed']
+	for uspeed in uploadspeed:
+		for os in uspeed['os']:
+			speed=uspeed['speed']
 			print short + '.menu.UploadSpeed.' + str(speed) + os + '=' + str(speed)
 			print short + '.menu.UploadSpeed.' + str(speed) + '.upload.speed=' + str(speed)
 	
