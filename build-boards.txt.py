@@ -4,7 +4,6 @@ macros = {
 	'defaults': [
 		[ '.upload.tool', 'esptool' ],
 		[ '.upload.speed', '115200' ],
-		[ '.upload.resetmethod', 'ck' ],
 		[ '.upload.maximum_size', '434160' ],
 		[ '.upload.maximum_data_size', '81920' ],
 		[ '.upload.wait_for_upload_port', 'true' ],
@@ -14,7 +13,6 @@ macros = {
 		[ '.build.f_cpu', '80000000L' ],
 		[ '.build.core', 'esp8266' ],
 		[ '.build.variant', 'generic' ],
-		[ '.build.flash_mode', 'qio' ],
 		[ '.build.spiffs_pagesize', '256' ],
 		[ '.build.debug_port', '' ],
 		[ '.build.debug_level', '' ],
@@ -35,8 +33,18 @@ macros = {
 		[ '.menu.FlashFreq.80.build.flash_freq', '80' ],
 		],
 
+	####################### upload.resetmethod
+	
+	'ck': [
+		[ '.upload.resetmethod', 'ck' ],
+		],
+	
+	'nodemcu': [
+		[ '.upload.resetmethod', 'nodemcu' ],
+		],
 
 	####################### menu.FlashSize
+
 	'512K64': [
 		[ '.menu.FlashSize.512K64', '512K (64K SPIFFS)' ],
 		[ '.menu.FlashSize.512K64.build.flash_size', '512K' ],
@@ -124,7 +132,7 @@ macros = {
 		[ '.menu.FlashSize.1M64.build.spiffs_blocksize', '4096' ],
 		[ '.menu.FlashSize.1M64.upload.maximum_size', '958448' ],
 		],
-	'2M': [
+	'2M0': [
 		[ '.menu.FlashSize.2M', '2M (1M SPIFFS)' ],
 		[ '.menu.FlashSize.2M.build.flash_size', '2M' ],
 		[ '.menu.FlashSize.2M.build.flash_ld', 'eagle.flash.2m.ld' ],
@@ -174,8 +182,26 @@ macros = {
 		[ '.menu.FlashSize.16M15M.upload.maximum_size', '1044464' ],
 		],
 	
+	####################### default flash size
+	
+	'512K': [
+		[ '.build.flash_size', '512k' ],
+		],
+		
+	'1M': [
+		[ '.build.flash_size', '1M' ],
+		],
+		
+	'2M': [
+		[ '.build.flash_size', '2M' ],
+		],
+		
+	'4M': [
+		[ '.build.flash_size', '4M' ],
+		],
 	
 	####################### menu.FlashMode
+	
 	'fm_io': [
 		[ '.menu.FlashMode.dio', 'DIO' ],
 		[ '.menu.FlashMode.dio.build.flash_mode', 'dio' ],
@@ -190,6 +216,67 @@ macros = {
 		[ '.menu.FlashMode.qout.build.flash_mode', 'qout' ],
 		],
 
+	####################### default flash_mode
+	
+	'dio': [
+		[ '.build.flash_mode', 'dio' ],
+		],
+
+	'qio': [
+		[ '.build.flash_mode', 'qio' ],
+		],
+
+	'dout': [
+		[ '.build.flash_mode', 'dout' ],
+		],
+
+	'qout': [
+		[ '.build.flash_mode', 'qout' ],
+		],
+
+	####################### debug
+
+	'debug': [
+		[ '.menu.Debug.Disabled', 'Disabled' ],
+		[ '.menu.Debug.Disabled.build.debug_port', '' ],
+		[ '.menu.Debug.Serial', 'Serial' ],
+		[ '.menu.Debug.Serial.build.debug_port', '-DDEBUG_ESP_PORT=Serial' ],
+		[ '.menu.Debug.Serial1', 'Serial1' ],
+		[ '.menu.Debug.Serial1.build.debug_port', '-DDEBUG_ESP_PORT=Serial1' ],
+		[ '.menu.DebugLevel.None____', 'None' ],
+		[ '.menu.DebugLevel.None____.build.debug_level', '' ],
+		[ '.menu.DebugLevel.Core____', 'Core' ],
+		[ '.menu.DebugLevel.Core____.build.debug_level', '-DDEBUG_ESP_CORE' ],
+		[ '.menu.DebugLevel.SSL_____', 'Core + SSL' ],
+		[ '.menu.DebugLevel.SSL_____.build.debug_level', '-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL' ],
+		[ '.menu.DebugLevel.SSL_MEM_', 'Core + SSL + TLS Mem' ],
+		[ '.menu.DebugLevel.SSL_MEM_.build.debug_level', '-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL -DDEBUG_TLS_MEM' ],
+		[ '.menu.DebugLevel.WiFic___', 'Core + WiFi' ],
+		[ '.menu.DebugLevel.WiFic___.build.debug_level', '-DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI' ],
+		[ '.menu.DebugLevel.WiFi____', 'WiFi' ],
+		[ '.menu.DebugLevel.WiFi____.build.debug_level', '-DDEBUG_ESP_WIFI' ],
+		[ '.menu.DebugLevel.HTTPClient', 'HTTPClient' ],
+		[ '.menu.DebugLevel.HTTPClient.build.debug_level', '-DDEBUG_ESP_HTTP_CLIENT' ],
+		[ '.menu.DebugLevel.HTTPClient2', 'HTTPClient + SSL' ],
+		[ '.menu.DebugLevel.HTTPClient2.build.debug_level', '-DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_SSL' ],
+		[ '.menu.DebugLevel.HTTPUpdate', 'HTTPUpdate' ],
+		[ '.menu.DebugLevel.HTTPUpdate.build.debug_level', '-DDEBUG_ESP_HTTP_UPDATE' ],
+		[ '.menu.DebugLevel.HTTPUpdate2', 'HTTPClient + HTTPUpdate' ],
+		[ '.menu.DebugLevel.HTTPUpdate2.build.debug_level', '-DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_UPDATE' ],
+		[ '.menu.DebugLevel.HTTPUpdate3', 'HTTPClient + HTTPUpdate + Updater' ],
+		[ '.menu.DebugLevel.HTTPUpdate3.build.debug_level', '-DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER' ],
+		[ '.menu.DebugLevel.HTTPServer', 'HTTPServer' ],
+		[ '.menu.DebugLevel.HTTPServer.build.debug_level', '-DDEBUG_ESP_HTTP_SERVER' ],
+		[ '.menu.DebugLevel.UPDATER', 'Updater' ],
+		[ '.menu.DebugLevel.UPDATER.build.debug_level', '-DDEBUG_ESP_UPDATER' ],
+		[ '.menu.DebugLevel.OTA_____', 'OTA' ],
+		[ '.menu.DebugLevel.OTA_____.build.debug_level', '-DDEBUG_ESP_OTA' ],
+		[ '.menu.DebugLevel.OTA2____', 'OTA + Updater' ],
+		[ '.menu.DebugLevel.OTA2____.build.debug_level', '-DDEBUG_ESP_OTA -DDEBUG_ESP_UPDATER' ],
+		[ '.menu.DebugLevel.all_____', 'All' ],
+		[ '.menu.DebugLevel.all_____.build.debug_level', '-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_TLS_MEM' ],
+		],
+
 	}
 
 boards = [
@@ -198,12 +285,13 @@ boards = [
 		'name': 'Generic ESP8266 Module',
 		'opts': {
 			'.build.board': 'ESP8266_ESP01',
-## flash_mode should be defined elsewhere and merged (in 'opts') where appropriate, how do we easily merge in python?
 			},
 		'macro': [
+			'ck',
+			'qio',
 			'cristalfreq', 'flashfreq', 
 			'fm_io', 'fm_out',
-			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M', '4M1M', '4M3M',
+			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M0', '4M1M', '4M3M',
 			],
 	},
 	{
@@ -211,18 +299,25 @@ boards = [
 		'name': 'Generic ESP8285 Module',
 		'opts': {
 			'.build.board': 'ESP8266_ESP01',
-			'.build.flash_mode': 'dout',
 			},
-		'macro': [ '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64' ],
+		'macro': [
+			'ck',
+			'dout',
+			'1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64'
+			],
 	},
 	{
 		'short': 'espduino',
 		'name': 'ESPDuino (ESP-13 Module)',
 		'opts': {
 			'.build.board': 'ESP8266_ESP13',
-			'.build.flash_mode': 'dio',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'ck',
+			'dio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'huzzah',
@@ -230,43 +325,60 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_ESP12',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'nodemcu',
+			'qio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'espresso_lite_v1',
 		'name': 'ESPresso Lite 1.0',
 		'opts': {
 			'.build.board': 'ESP8266_ESPRESSO_LITE_V1',
-			'.build.flash_mode': 'dio',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'dio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'espresso_lite_v2',
 		'name': 'ESPresso Lite 2.0',
 		'opts': {
 			'.build.board': 'ESP8266_ESPRESSO_LITE_V2',
-			'.build.flash_mode': 'dio',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'dio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'phoenix_v1',
 		'name': 'Phoenix 1.0',
 		'opts': {
 			'.build.board': 'ESP8266_PHOENIX_V1',
-			'.build.flash_mode': 'dio',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'dio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'phoenix_v2',
 		'name': 'Phoenix 2.0',
 		'opts': {
 			'.build.board': 'ESP8266_PHOENIX_V2',
-			'.build.flash_mode': 'dio',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'dio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'nodemcu',
@@ -274,38 +386,61 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_NODEMCU',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'nodemcu',
+			'qio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'nodemcuv2',
 		'name': 'NodeMCU 1.0 (ESP-12E Module)',
 		'opts': {
 			'.build.board': 'ESP8266_NODEMCU',
-			'.build.flash_mode': 'dio',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'nodemcu',
+			'dio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'modwifi',
 		'name': 'Olimex MOD-WIFI-ESP8266(-DEV)',
 		'opts': {
 			'.build.board': 'MOD_WIFI_ESP8266',
-			}
+			},
+		'macro': [
+			'ck',
+			'qio',
+			'2M',
+			],
 	},
 	{
 		'short': 'thing',
 		'name': 'SparkFun ESP8266 Thing',
 		'opts': {
 			'.build.board': 'ESP8266_THING',
-			}
+			},
+		'macro': [
+			'ck',
+			'qio',
+			'512K',
+			],
 	},
 	{
 		'short': 'thingdev',
 		'name': 'SparkFun ESP8266 Thing Dev',
 		'opts': {
 			'.build.board': 'ESP8266_THING_DEV',
-			'.build.flash_mode': 'dio',
-			}
+			},
+		'macro': [
+			'nodemcu',
+			'dio',
+			'512K',
+			],
 	},
 	{
 		'short': 'esp210',
@@ -313,33 +448,50 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_ESP210',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'ck',
+			'qio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'd1_mini',
 		'name': 'WeMos D1 R2 & mini',
 		'opts': {
 			'.build.board': 'ESP8266_WEMOS_D1R2MINI',
-			'.build.flash_mode': 'dio',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'nodemcu',
+			'dio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'd1_mini_lite',
 		'name': 'Wemos D1 mini lite (ESP8285)',
 		'opts': {
 			'.build.board': 'ESP8266_WEMOS_D1MINILITE',
-			'.build.flash_mode': 'dout',
-			}
+			},
+		'macro': [
+			'nodemcu',
+			'dout',
+			'1M',
+			],
 	},
 	{
 		'short': 'd1',
 		'name': 'WeMos D1 R1',
 		'opts': {
 			'.build.board': 'ESP8266_WEMOS_D1R1',
-			'.build.flash_mode': 'dio',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'nodemcu',
+			'dio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'espino',
@@ -348,6 +500,9 @@ boards = [
 			'.build.board': 'ESP8266_ESP12',
 			},
 		'macro': [
+			'ck',
+			'qio',
+			'4M',
 			'fm_io',
 			]
 	},
@@ -357,7 +512,12 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_ESP13',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'nodemcu',
+			'qio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'wifinfo',
@@ -368,6 +528,7 @@ boards = [
 			},
 		'macro': [
 			'flashfreq',
+			'1M',
 			'fm_io',
 			]
 	},
@@ -379,8 +540,9 @@ boards = [
 			},
 		'macro': [
 			'flashfreq',
+			'qio',
 			'fm_io', 'fm_out',
-			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M', '4M1M', '4M3M', '8M7M', '16M15M'
+			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M0', '4M1M', '4M3M', '8M7M', '16M15M'
 			],
 	},
 	{
@@ -392,23 +554,34 @@ boards = [
 			'.menu.BoardModel.primo.build.board': 'ESP8266_ARDUINO_PRIMO',
 			'.menu.BoardModel.unowifideved.build.board': 'ESP8266_ARDUINO_UNOWIFI',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'qio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	{
 		'short': 'gen4iod',
 		'name': '4D Systems gen4 IoD Range',
 		'opts': {
 			'.build.board': 'GEN4_IOD',
-			}
+			},
+		'macro': [
+			'qio',
+			'512K',
+			],
 	},
 	{
 		'short': 'oak',
 		'name': 'DigiStump Oak',
 		'opts': {
 			'.build.board': 'ESP8266_OAK',
-			'.build.flash_mode': 'dio',
 			},
-		'macro': [ '4M1M', '4M3M' ],
+		'macro': [
+			'dio',
+			'4M',
+			'4M1M', '4M3M'
+			],
 	},
 	]
 
@@ -463,8 +636,10 @@ for board in boards:
 
 	# macros
 	macrolist = [ ]
+	macrolistend = [ 'debug' ]
 	if 'macro' in board:
 		macrolist += board['macro']
+	macrolist += macrolistend
 	for block in macrolist:
 		for keyval in macros[block]:
 			print short + keyval[0] + '=' + keyval[1]
