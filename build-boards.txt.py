@@ -19,6 +19,21 @@ defaults = [
 		[ '.build.debug_level', '' ],
 	]
 
+blocks = {
+	'flash1': [
+		[ 'key1', 'val1' ],
+		[ 'key2', 'val2' ],
+		],
+	'flash2': [
+		[ 'kay3', 'vul3' ],
+		[ 'kay4', 'vul4' ],
+		],
+	'flash3': [
+		[ 'koy5', 'vel5' ],
+		[ 'koy6', 'vel6' ],
+		],
+	}
+
 boards = [
 	{
 		'short': 'generic',
@@ -30,7 +45,8 @@ boards = [
 			'.menu.FlashMode.qio.build.flash_mode': 'qio',
 			'.menu.FlashMode.dout.build.flash_mode': 'dout',
 			'.menu.FlashMode.qout.build.flash_mode': 'qout',
-			}
+			},
+			'bopts': [ 'flash1', 'flash3', ]
 	},
 	{
 		'short': 'esp8285',
@@ -259,6 +275,11 @@ for board in boards:
 		for opt in board['opts']:
 			print short + opt + '=' + board['opts'][opt]
 	
+	if 'bopts' in board:
+		for block in board['bopts']:
+			for keyval in blocks[block]:
+				print short + '.' + keyval[0] + '=' + keyval[1]
+					
 	for uspeed in uploadspeed:
 		for os in uspeed['os']:
 			speed=uspeed['speed']
