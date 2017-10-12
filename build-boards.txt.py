@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-defaults = [
+macros = {
+	'defaults': [
 		[ '.upload.tool', 'esptool' ],
 		[ '.upload.speed', '115200' ],
 		[ '.upload.resetmethod', 'ck' ],
@@ -17,21 +18,162 @@ defaults = [
 		[ '.build.spiffs_pagesize', '256' ],
 		[ '.build.debug_port', '' ],
 		[ '.build.debug_level', '' ],
-	]
+		],
 
-blocks = {
-	'flash1': [
-		[ 'key1', 'val1' ],
-		[ 'key2', 'val2' ],
+	####################### menu.FlashSize
+	'512K64': [
+		[ '.menu.FlashSize.512K64', '512K (64K SPIFFS)' ],
+		[ '.menu.FlashSize.512K64.build.flash_size', '512K' ],
+		[ '.menu.FlashSize.512K64.build.flash_ld', 'eagle.flash.512k64.ld' ],
+		[ '.menu.FlashSize.512K64.build.spiffs_start', '0x6B000' ],
+		[ '.menu.FlashSize.512K64.build.spiffs_end', '0x7B000' ],
+		[ '.menu.FlashSize.512K64.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.512K64.upload.maximum_size', '434160' ],
 		],
-	'flash2': [
-		[ 'kay3', 'vul3' ],
-		[ 'kay4', 'vul4' ],
+	'512K128': [
+		[ '.menu.FlashSize.512K128', '512K (128K SPIFFS)' ],
+		[ '.menu.FlashSize.512K128.build.flash_size', '512K' ],
+		[ '.menu.FlashSize.512K128.build.flash_ld', 'eagle.flash.512k128.ld' ],
+		[ '.menu.FlashSize.512K128.build.spiffs_start', '0x5B000' ],
+		[ '.menu.FlashSize.512K128.build.spiffs_end', '0x7B000' ],
+		[ '.menu.FlashSize.512K128.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.512K128.upload.maximum_size', '368624' ],
 		],
-	'flash3': [
-		[ 'koy5', 'vel5' ],
-		[ 'koy6', 'vel6' ],
+	'512K0': [
+		[ '.menu.FlashSize.512K0', '512K (no SPIFFS)' ],
+		[ '.menu.FlashSize.512K0.build.flash_size', '512K' ],
+		[ '.menu.FlashSize.512K0.build.flash_ld', 'eagle.flash.512k0.ld' ],
+		[ '.menu.FlashSize.512K0.upload.maximum_size', '499696' ],
 		],
+	'1M512': [
+		[ '.menu.FlashSize.1M512', '1M (512K SPIFFS)' ],
+		[ '.menu.FlashSize.1M512.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M512.build.flash_ld', 'eagle.flash.1m512.ld' ],
+		[ '.menu.FlashSize.1M512.build.spiffs_start', '0x7B000' ],
+		[ '.menu.FlashSize.1M512.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M512.build.spiffs_blocksize', '8192' ],
+		[ '.menu.FlashSize.1M512.upload.maximum_size', '499696' ],
+		],
+	'1M256': [
+		[ '.menu.FlashSize.1M256', '1M (256K SPIFFS)' ],
+		[ '.menu.FlashSize.1M256.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M256.build.flash_ld', 'eagle.flash.1m256.ld' ],
+		[ '.menu.FlashSize.1M256.build.spiffs_start', '0xBB000' ],
+		[ '.menu.FlashSize.1M256.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M256.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M256.upload.maximum_size', '761840' ],
+		],
+	'1M192': [
+		[ '.menu.FlashSize.1M192', '1M (192K SPIFFS)' ],
+		[ '.menu.FlashSize.1M192.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M192.build.flash_ld', 'eagle.flash.1m192.ld' ],
+		[ '.menu.FlashSize.1M192.build.spiffs_start', '0xCB000' ],
+		[ '.menu.FlashSize.1M192.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M192.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M192.upload.maximum_size', '827376' ],
+		],
+	'1M160': [
+		[ '.menu.FlashSize.1M160', '1M (160K SPIFFS)' ],
+		[ '.menu.FlashSize.1M160.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M160.build.flash_ld', 'eagle.flash.1m160.ld' ],
+		[ '.menu.FlashSize.1M160.build.spiffs_start', '0xD3000' ],
+		[ '.menu.FlashSize.1M160.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M160.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M160.upload.maximum_size', '860144' ],
+		],
+	'1M144': [
+		[ '.menu.FlashSize.1M144', '1M (144K SPIFFS)' ],
+		[ '.menu.FlashSize.1M144.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M144.build.flash_ld', 'eagle.flash.1m144.ld' ],
+		[ '.menu.FlashSize.1M144.build.spiffs_start', '0xD7000' ],
+		[ '.menu.FlashSize.1M144.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M144.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M144.upload.maximum_size', '876528' ],
+		],
+	'1M128': [
+		[ '.menu.FlashSize.1M128', '1M (128K SPIFFS)' ],
+		[ '.menu.FlashSize.1M128.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M128.build.flash_ld', 'eagle.flash.1m128.ld' ],
+		[ '.menu.FlashSize.1M128.build.spiffs_start', '0xDB000' ],
+		[ '.menu.FlashSize.1M128.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M128.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M128.upload.maximum_size', '892912' ],
+		],
+	'1M64': [
+		[ '.menu.FlashSize.1M64', '1M (64K SPIFFS)' ],
+		[ '.menu.FlashSize.1M64.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M64.build.flash_ld', 'eagle.flash.1m64.ld' ],
+		[ '.menu.FlashSize.1M64.build.spiffs_start', '0xEB000' ],
+		[ '.menu.FlashSize.1M64.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M64.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M64.upload.maximum_size', '958448' ],
+		],
+	'2M': [
+		[ '.menu.FlashSize.2M', '2M (1M SPIFFS)' ],
+		[ '.menu.FlashSize.2M.build.flash_size', '2M' ],
+		[ '.menu.FlashSize.2M.build.flash_ld', 'eagle.flash.2m.ld' ],
+		[ '.menu.FlashSize.2M.build.spiffs_start', '0x100000' ],
+		[ '.menu.FlashSize.2M.build.spiffs_end', '0x1FB000' ],
+		[ '.menu.FlashSize.2M.build.spiffs_blocksize', '8192' ],
+		[ '.menu.FlashSize.2M.upload.maximum_size', '1044464' ],
+		],
+	'4M1M': [
+		[ '.menu.FlashSize.4M1M', '4M (1M SPIFFS)' ],
+		[ '.menu.FlashSize.4M1M.build.flash_size', '4M' ],
+		[ '.menu.FlashSize.4M1M.build.flash_ld', 'eagle.flash.4m1m.ld' ],
+		[ '.menu.FlashSize.4M1M.build.spiffs_start', '0x300000' ],
+		[ '.menu.FlashSize.4M1M.build.spiffs_end', '0x3FB000' ],
+		[ '.menu.FlashSize.4M1M.build.spiffs_blocksize', '8192' ],
+		[ '.menu.FlashSize.4M1M.build.spiffs_pagesize', '256' ],
+		[ '.menu.FlashSize.4M1M.upload.maximum_size', '1044464' ],
+		],
+	'4M3M': [
+		[ '.menu.FlashSize.4M3M', '4M (3M SPIFFS)' ],
+		[ '.menu.FlashSize.4M3M.build.flash_size', '4M' ],
+		[ '.menu.FlashSize.4M3M.build.flash_ld', 'eagle.flash.4m.ld' ],
+		[ '.menu.FlashSize.4M3M.build.spiffs_start', '0x100000' ],
+		[ '.menu.FlashSize.4M3M.build.spiffs_end', '0x3FB000' ],
+		[ '.menu.FlashSize.4M3M.build.spiffs_pagesize', '256' ],
+		[ '.menu.FlashSize.4M3M.build.spiffs_blocksize', '8192' ],
+		[ '.menu.FlashSize.4M3M.upload.maximum_size', '1044464' ],
+		],
+	'8M7M': [
+		[ '.menu.FlashSize.8M7M', '8M (7M SPIFFS)' ],
+		[ '.menu.FlashSize.8M7M.build.flash_size', '8M' ],
+		[ '.menu.FlashSize.8M7M.build.flash_ld', 'eagle.flash.8m.ld' ],
+		[ '.menu.FlashSize.8M7M.build.spiffs_start', '0x100000' ],
+		[ '.menu.FlashSize.8M7M.build.spiffs_end', '0x7FB000' ],
+		[ '.menu.FlashSize.8M7M.build.spiffs_pagesize', '256' ],
+		[ '.menu.FlashSize.8M7M.build.spiffs_blocksize', '8192' ],
+		[ '.menu.FlashSize.8M7M.upload.maximum_size', '1044464' ],
+		],
+	'16M15M': [
+		[ '.menu.FlashSize.16M15M', '16M (15M SPIFFS)' ],
+		[ '.menu.FlashSize.16M15M.build.flash_size', '16M' ],
+		[ '.menu.FlashSize.16M15M.build.flash_ld', 'eagle.flash.16m.ld' ],
+		[ '.menu.FlashSize.16M15M.build.spiffs_start', '0x100000' ],
+		[ '.menu.FlashSize.16M15M.build.spiffs_end', '0x17FB000' ],
+		[ '.menu.FlashSize.16M15M.build.spiffs_pagesize', '256' ],
+		[ '.menu.FlashSize.16M15M.build.spiffs_blocksize', '8192' ],
+		[ '.menu.FlashSize.16M15M.upload.maximum_size', '1044464' ],
+		],
+	
+	
+	####################### menu.FlashMode
+	'fm_io': [
+		[ '.menu.FlashMode.dio', 'DIO' ],
+		[ '.menu.FlashMode.dio.build.flash_mode', 'dio' ],
+		[ '.menu.FlashMode.qio', 'QIO' ],
+		[ '.menu.FlashMode.qio.build.flash_mode', 'qio' ],
+		],
+	
+	'fm_out': [
+		[ '.menu.FlashMode.dout', 'DOUT' ],
+		[ '.menu.FlashMode.dout.build.flash_mode', 'dout' ],
+		[ '.menu.FlashMode.qout', 'QOUT' ],
+		[ '.menu.FlashMode.qout.build.flash_mode', 'qout' ],
+		],
+
 	}
 
 boards = [
@@ -41,12 +183,11 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_ESP01',
 ## flash_mode should be defined elsewhere and merged (in 'opts') where appropriate, how do we easily merge in python?
-			'.menu.FlashMode.dio.build.flash_mode': 'dio',
-			'.menu.FlashMode.qio.build.flash_mode': 'qio',
-			'.menu.FlashMode.dout.build.flash_mode': 'dout',
-			'.menu.FlashMode.qout.build.flash_mode': 'qout',
 			},
-			'bopts': [ 'flash1', 'flash3', ]
+		'macro': [
+			'fm_io', 'fm_out',
+			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M', '4M1M', '4M3M',
+			],
 	},
 	{
 		'short': 'esp8285',
@@ -54,7 +195,8 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_ESP01',
 			'.build.flash_mode': 'dout',
-			}
+			},
+		'macro': [ '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64' ],
 	},
 	{
 		'short': 'espduino',
@@ -62,14 +204,16 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_ESP13',
 			'.build.flash_mode': 'dio',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'huzzah',
 		'name': 'Adafruit HUZZAH ESP8266',
 		'opts': {
 			'.build.board': 'ESP8266_ESP12',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'espresso_lite_v1',
@@ -77,7 +221,8 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_ESPRESSO_LITE_V1',
 			'.build.flash_mode': 'dio',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'espresso_lite_v2',
@@ -85,7 +230,8 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_ESPRESSO_LITE_V2',
 			'.build.flash_mode': 'dio',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'phoenix_v1',
@@ -93,7 +239,8 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_PHOENIX_V1',
 			'.build.flash_mode': 'dio',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'phoenix_v2',
@@ -101,14 +248,16 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_PHOENIX_V2',
 			'.build.flash_mode': 'dio',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'nodemcu',
 		'name': 'NodeMCU 0.9 (ESP-12 Module)',
 		'opts': {
 			'.build.board': 'ESP8266_NODEMCU',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'nodemcuv2',
@@ -116,7 +265,8 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_NODEMCU',
 			'.build.flash_mode': 'dio',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'modwifi',
@@ -145,7 +295,8 @@ boards = [
 		'name': 'SweetPea ESP-210',
 		'opts': {
 			'.build.board': 'ESP8266_ESP210',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'd1_mini',
@@ -153,7 +304,8 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_WEMOS_D1R2MINI',
 			'.build.flash_mode': 'dio',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'd1_mini_lite',
@@ -169,23 +321,26 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_WEMOS_D1R1',
 			'.build.flash_mode': 'dio',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'espino',
 		'name': 'ESPino (ESP-12 Module)',
 		'opts': {
 			'.build.board': 'ESP8266_ESP12',
-			'.menu.FlashMode.dio.build.flash_mode': 'dio',
-			'.menu.FlashMode.qio.build.flash_mode': 'qio',
-			}
+			},
+		'macro': [
+			'fm_io',
+			]
 	},
 	{
 		'short': 'espinotee',
 		'name': 'ThaiEasyElec\'s ESPino',
 		'opts': {
 			'.build.board': 'ESP8266_ESP13',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'wifinfo',
@@ -193,20 +348,21 @@ boards = [
 		'opts': {
 			'.build.board': 'WIFINFO',
 			'.menu.ESPModule.ESP12.build.board': 'ESP8266_ESP12',
-			'.menu.FlashMode.dio.build.flash_mode': 'dio',
-			'.menu.FlashMode.qio.build.flash_mode': 'qio',
-			}
+			},
+		'macro': [
+			'fm_io',
+			]
 	},
 	{
 		'short': 'coredev',
 		'name': 'Core Development Module',
 		'opts': {
 			'.build.board': 'ESP8266_ESP01',
-			'.menu.FlashMode.dio.build.flash_mode': 'dio',
-			'.menu.FlashMode.qio.build.flash_mode': 'qio',
-			'.menu.FlashMode.dout.build.flash_mode': 'dout',
-			'.menu.FlashMode.qout.build.flash_mode': 'qout',
-			}
+			},
+		'macro': [
+			'fm_io', 'fm_out',
+			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M', '4M1M', '4M3M', '8M7M', '16M15M'
+			],
 	},
 	{
 		'short': 'arduino-esp8266',
@@ -216,7 +372,8 @@ boards = [
 			'.menu.BoardModel.starottodeved.build.board': 'ESP8266_ARDUINO_STAR_OTTO',
 			'.menu.BoardModel.primo.build.board': 'ESP8266_ARDUINO_PRIMO',
 			'.menu.BoardModel.unowifideved.build.board': 'ESP8266_ARDUINO_UNOWIFI',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	{
 		'short': 'gen4iod',
@@ -231,7 +388,8 @@ boards = [
 		'opts': {
 			'.build.board': 'ESP8266_OAK',
 			'.build.flash_mode': 'dio',
-			}
+			},
+		'macro': [ '4M1M', '4M3M' ],
 	},
 	]
 
@@ -267,19 +425,20 @@ for board in boards:
 	short=board['short']
 	print short + '.name=' + board['name']
 
-	for default in defaults:
-		if not ('opts' in board) or not (default[0] in board['opts']):
-			print short + default[0] + '=' + default[1]
-
+	# standalone options
 	if 'opts' in board:
 		for opt in board['opts']:
 			print short + opt + '=' + board['opts'][opt]
 	
-	if 'bopts' in board:
-		for block in board['bopts']:
-			for keyval in blocks[block]:
-				print short + '.' + keyval[0] + '=' + keyval[1]
-					
+	# macros
+	macrolist = [ 'defaults' ]
+	if 'macro' in board:
+		macrolist += board['macro']
+	for block in macrolist:
+		for keyval in macros[block]:
+			print short + keyval[0] + '=' + keyval[1]
+
+	# serial speed					
 	for uspeed in uploadspeed:
 		for os in uspeed['os']:
 			speed=uspeed['speed']
