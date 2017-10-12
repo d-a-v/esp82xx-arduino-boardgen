@@ -20,6 +20,22 @@ macros = {
 		[ '.build.debug_level', '' ],
 		],
 
+	#######################
+	
+	'cristalfreq': [
+		[ '.menu.CrystalFreq.26', '26 MHz' ],
+		[ '.menu.CrystalFreq.40', '40 MHz' ],
+		[ '.menu.CrystalFreq.40.build.extra_flags', '-DF_CRYSTAL=40000000' ],
+		],
+		
+	'flashfreq': [
+		[ '.menu.FlashFreq.40', '40MHz' ],
+		[ '.menu.FlashFreq.40.build.flash_freq', '40' ],
+		[ '.menu.FlashFreq.80', '80MHz' ],
+		[ '.menu.FlashFreq.80.build.flash_freq', '80' ],
+		],
+
+
 	####################### menu.FlashSize
 	'512K64': [
 		[ '.menu.FlashSize.512K64', '512K (64K SPIFFS)' ],
@@ -185,6 +201,7 @@ boards = [
 ## flash_mode should be defined elsewhere and merged (in 'opts') where appropriate, how do we easily merge in python?
 			},
 		'macro': [
+			'cristalfreq', 'flashfreq', 
 			'fm_io', 'fm_out',
 			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M', '4M1M', '4M3M',
 			],
@@ -350,6 +367,7 @@ boards = [
 			'.menu.ESPModule.ESP12.build.board': 'ESP8266_ESP12',
 			},
 		'macro': [
+			'flashfreq',
 			'fm_io',
 			]
 	},
@@ -360,6 +378,7 @@ boards = [
 			'.build.board': 'ESP8266_ESP01',
 			},
 		'macro': [
+			'flashfreq',
 			'fm_io', 'fm_out',
 			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M', '4M1M', '4M3M', '8M7M', '16M15M'
 			],
@@ -432,6 +451,18 @@ for board in boards:
 	
 	# macros
 	macrolist = [ 'defaults' ]
+	for block in macrolist:
+		for keyval in macros[block]:
+			print short + keyval[0] + '=' + keyval[1]
+
+	# cpu frequency
+	print short + '.menu.CpuFrequency.80=80 MHz'
+	print short + '.menu.CpuFrequency.80.build.f_cpu=80000000L'
+	print short + '.menu.CpuFrequency.160=160 MHz'
+	print short + '.menu.CpuFrequency.160.build.f_cpu=160000000L'
+
+	# macros
+	macrolist = [ ]
 	if 'macro' in board:
 		macrolist += board['macro']
 	for block in macrolist:
