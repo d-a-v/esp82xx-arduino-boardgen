@@ -1,5 +1,328 @@
 #!/usr/bin/env python
 
+# board descriptor:
+# 	short
+#	name
+#	opts:	specific entries
+#	macro:	common entries
+#		unmodifiable parameters:
+#			f_ck/f_nodemcu:			fixed reset method
+#			f_qio/f_dio/f_qout/f_dout:	fixed flash mode
+#			f_512K/f_1M/f_2M/f_4M:		fixed flash size
+#		selection menu:
+#			cristalfreq/flashfreq:		menus for selection cristal/flash frequency
+#			flashmode_io/flashmode_out:	menus for flashmode selection (dio/qio / dout/qout)
+#			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M0', '4M1M', '4M3M':
+#							menus for code/SPIFFS ratio
+
+boards = [
+	{
+		'short': 'generic',
+		'name': 'Generic ESP8266 Module',
+		'opts': {
+			'.build.board': 'ESP8266_ESP01',
+			},
+		'macro': [
+			'f_ck',
+			'f_qio',
+			'cristalfreq', 'flashfreq', 
+			'flashmode_io', 'flashmode_out',
+			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M0', '4M1M', '4M3M',
+			],
+	},
+	{
+		'short': 'esp8285',
+		'name': 'Generic ESP8285 Module',
+		'opts': {
+			'.build.board': 'ESP8266_ESP01',
+			},
+		'macro': [
+			'f_ck',
+			'f_dout',
+			'1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64'
+			],
+	},
+	{
+		'short': 'espduino',
+		'name': 'ESPDuino (ESP-13 Module)',
+		'opts': {
+			'.build.board': 'ESP8266_ESP13',
+			},
+		'macro': [
+			'f_ck',
+			'f_dio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'huzzah',
+		'name': 'Adafruit HUZZAH ESP8266',
+		'opts': {
+			'.build.board': 'ESP8266_ESP12',
+			},
+		'macro': [
+			'f_nodemcu',
+			'f_qio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'espresso_lite_v1',
+		'name': 'ESPresso Lite 1.0',
+		'opts': {
+			'.build.board': 'ESP8266_ESPRESSO_LITE_V1',
+			},
+		'macro': [
+			'f_dio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'espresso_lite_v2',
+		'name': 'ESPresso Lite 2.0',
+		'opts': {
+			'.build.board': 'ESP8266_ESPRESSO_LITE_V2',
+			},
+		'macro': [
+			'f_dio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'phoenix_v1',
+		'name': 'Phoenix 1.0',
+		'opts': {
+			'.build.board': 'ESP8266_PHOENIX_V1',
+			},
+		'macro': [
+			'f_dio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'phoenix_v2',
+		'name': 'Phoenix 2.0',
+		'opts': {
+			'.build.board': 'ESP8266_PHOENIX_V2',
+			},
+		'macro': [
+			'f_dio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'nodemcu',
+		'name': 'NodeMCU 0.9 (ESP-12 Module)',
+		'opts': {
+			'.build.board': 'ESP8266_NODEMCU',
+			},
+		'macro': [
+			'f_nodemcu',
+			'f_qio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'nodemcuv2',
+		'name': 'NodeMCU 1.0 (ESP-12E Module)',
+		'opts': {
+			'.build.board': 'ESP8266_NODEMCU',
+			},
+		'macro': [
+			'f_nodemcu',
+			'f_dio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'modwifi',
+		'name': 'Olimex MOD-WIFI-ESP8266(-DEV)',
+		'opts': {
+			'.build.board': 'MOD_WIFI_ESP8266',
+			},
+		'macro': [
+			'f_ck',
+			'f_qio',
+			'f_2M',
+			],
+	},
+	{
+		'short': 'thing',
+		'name': 'SparkFun ESP8266 Thing',
+		'opts': {
+			'.build.board': 'ESP8266_THING',
+			},
+		'macro': [
+			'f_ck',
+			'f_qio',
+			'f_512K',
+			],
+	},
+	{
+		'short': 'thingdev',
+		'name': 'SparkFun ESP8266 Thing Dev',
+		'opts': {
+			'.build.board': 'ESP8266_THING_DEV',
+			},
+		'macro': [
+			'f_nodemcu',
+			'f_dio',
+			'f_512K',
+			],
+	},
+	{
+		'short': 'esp210',
+		'name': 'SweetPea ESP-210',
+		'opts': {
+			'.build.board': 'ESP8266_ESP210',
+			},
+		'macro': [
+			'f_ck',
+			'f_qio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'd1_mini',
+		'name': 'WeMos D1 R2 & mini',
+		'opts': {
+			'.build.board': 'ESP8266_WEMOS_D1R2MINI',
+			},
+		'macro': [
+			'f_nodemcu',
+			'f_dio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'd1_mini_lite',
+		'name': 'Wemos D1 mini lite (ESP8285)',
+		'opts': {
+			'.build.board': 'ESP8266_WEMOS_D1MINILITE',
+			},
+		'macro': [
+			'f_nodemcu',
+			'f_dout',
+			'f_1M',
+			],
+	},
+	{
+		'short': 'd1',
+		'name': 'WeMos D1 R1',
+		'opts': {
+			'.build.board': 'ESP8266_WEMOS_D1R1',
+			},
+		'macro': [
+			'f_nodemcu',
+			'f_dio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'espino',
+		'name': 'ESPino (ESP-12 Module)',
+		'opts': {
+			'.build.board': 'ESP8266_ESP12',
+			},
+		'macro': [
+			'f_ck',
+			'f_qio',
+			'f_4M',
+			'flashmode_io',
+			]
+	},
+	{
+		'short': 'espinotee',
+		'name': 'ThaiEasyElec\'s ESPino',
+		'opts': {
+			'.build.board': 'ESP8266_ESP13',
+			},
+		'macro': [
+			'f_nodemcu',
+			'f_qio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'wifinfo',
+		'name': 'WifInfo',
+		'opts': {
+			'.build.board': 'WIFINFO',
+			'.menu.ESPModule.ESP12.build.board': 'ESP8266_ESP12',
+			},
+		'macro': [
+			'f_1M',
+			'flashfreq',
+			'flashmode_io',
+			]
+	},
+	{
+		'short': 'coredev',
+		'name': 'Core Development Module',
+		'opts': {
+			'.build.board': 'ESP8266_ESP01',
+			},
+		'macro': [
+			'f_qio',
+			'flashfreq',
+			'flashmode_io', 'flashmode_out',
+			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M0', '4M1M', '4M3M', '8M7M', '16M15M'
+			],
+	},
+	{
+		'short': 'arduino-esp8266',
+		'name': 'Arduino',
+		'opts': {
+			'.build.board': 'ESP8266_ARDUINO',
+			'.menu.BoardModel.starottodeved.build.board': 'ESP8266_ARDUINO_STAR_OTTO',
+			'.menu.BoardModel.primo.build.board': 'ESP8266_ARDUINO_PRIMO',
+			'.menu.BoardModel.unowifideved.build.board': 'ESP8266_ARDUINO_UNOWIFI',
+			},
+		'macro': [
+			'f_qio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	{
+		'short': 'gen4iod',
+		'name': '4D Systems gen4 IoD Range',
+		'opts': {
+			'.build.board': 'GEN4_IOD',
+			},
+		'macro': [
+			'f_qio',
+			'f_512K',
+			],
+	},
+	{
+		'short': 'oak',
+		'name': 'DigiStump Oak',
+		'opts': {
+			'.build.board': 'ESP8266_OAK',
+			},
+		'macro': [
+			'f_dio',
+			'f_4M',
+			'4M1M', '4M3M'
+			],
+	},
+	]
+
+################################################################
+
 macros = {
 	'defaults': [
 		[ '.upload.tool', 'esptool' ],
@@ -35,11 +358,11 @@ macros = {
 
 	####################### upload.resetmethod
 	
-	'ck': [
+	'f_ck': [
 		[ '.upload.resetmethod', 'ck' ],
 		],
 	
-	'nodemcu': [
+	'f_nodemcu': [
 		[ '.upload.resetmethod', 'nodemcu' ],
 		],
 
@@ -184,32 +507,32 @@ macros = {
 	
 	####################### default flash size
 	
-	'512K': [
+	'f_512K': [
 		[ '.build.flash_size', '512k' ],
 		],
 		
-	'1M': [
+	'f_1M': [
 		[ '.build.flash_size', '1M' ],
 		],
 		
-	'2M': [
+	'f_2M': [
 		[ '.build.flash_size', '2M' ],
 		],
 		
-	'4M': [
+	'f_4M': [
 		[ '.build.flash_size', '4M' ],
 		],
 	
 	####################### menu.FlashMode
 	
-	'fm_io': [
+	'flashmode_io': [
 		[ '.menu.FlashMode.dio', 'DIO' ],
 		[ '.menu.FlashMode.dio.build.flash_mode', 'dio' ],
 		[ '.menu.FlashMode.qio', 'QIO' ],
 		[ '.menu.FlashMode.qio.build.flash_mode', 'qio' ],
 		],
 	
-	'fm_out': [
+	'flashmode_out': [
 		[ '.menu.FlashMode.dout', 'DOUT' ],
 		[ '.menu.FlashMode.dout.build.flash_mode', 'dout' ],
 		[ '.menu.FlashMode.qout', 'QOUT' ],
@@ -218,19 +541,19 @@ macros = {
 
 	####################### default flash_mode
 	
-	'dio': [
+	'f_dio': [
 		[ '.build.flash_mode', 'dio' ],
 		],
 
-	'qio': [
+	'f_qio': [
 		[ '.build.flash_mode', 'qio' ],
 		],
 
-	'dout': [
+	'f_dout': [
 		[ '.build.flash_mode', 'dout' ],
 		],
 
-	'qout': [
+	'f_qout': [
 		[ '.build.flash_mode', 'qout' ],
 		],
 
@@ -279,312 +602,7 @@ macros = {
 
 	}
 
-boards = [
-	{
-		'short': 'generic',
-		'name': 'Generic ESP8266 Module',
-		'opts': {
-			'.build.board': 'ESP8266_ESP01',
-			},
-		'macro': [
-			'ck',
-			'qio',
-			'cristalfreq', 'flashfreq', 
-			'fm_io', 'fm_out',
-			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M0', '4M1M', '4M3M',
-			],
-	},
-	{
-		'short': 'esp8285',
-		'name': 'Generic ESP8285 Module',
-		'opts': {
-			'.build.board': 'ESP8266_ESP01',
-			},
-		'macro': [
-			'ck',
-			'dout',
-			'1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64'
-			],
-	},
-	{
-		'short': 'espduino',
-		'name': 'ESPDuino (ESP-13 Module)',
-		'opts': {
-			'.build.board': 'ESP8266_ESP13',
-			},
-		'macro': [
-			'ck',
-			'dio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'huzzah',
-		'name': 'Adafruit HUZZAH ESP8266',
-		'opts': {
-			'.build.board': 'ESP8266_ESP12',
-			},
-		'macro': [
-			'nodemcu',
-			'qio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'espresso_lite_v1',
-		'name': 'ESPresso Lite 1.0',
-		'opts': {
-			'.build.board': 'ESP8266_ESPRESSO_LITE_V1',
-			},
-		'macro': [
-			'dio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'espresso_lite_v2',
-		'name': 'ESPresso Lite 2.0',
-		'opts': {
-			'.build.board': 'ESP8266_ESPRESSO_LITE_V2',
-			},
-		'macro': [
-			'dio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'phoenix_v1',
-		'name': 'Phoenix 1.0',
-		'opts': {
-			'.build.board': 'ESP8266_PHOENIX_V1',
-			},
-		'macro': [
-			'dio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'phoenix_v2',
-		'name': 'Phoenix 2.0',
-		'opts': {
-			'.build.board': 'ESP8266_PHOENIX_V2',
-			},
-		'macro': [
-			'dio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'nodemcu',
-		'name': 'NodeMCU 0.9 (ESP-12 Module)',
-		'opts': {
-			'.build.board': 'ESP8266_NODEMCU',
-			},
-		'macro': [
-			'nodemcu',
-			'qio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'nodemcuv2',
-		'name': 'NodeMCU 1.0 (ESP-12E Module)',
-		'opts': {
-			'.build.board': 'ESP8266_NODEMCU',
-			},
-		'macro': [
-			'nodemcu',
-			'dio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'modwifi',
-		'name': 'Olimex MOD-WIFI-ESP8266(-DEV)',
-		'opts': {
-			'.build.board': 'MOD_WIFI_ESP8266',
-			},
-		'macro': [
-			'ck',
-			'qio',
-			'2M',
-			],
-	},
-	{
-		'short': 'thing',
-		'name': 'SparkFun ESP8266 Thing',
-		'opts': {
-			'.build.board': 'ESP8266_THING',
-			},
-		'macro': [
-			'ck',
-			'qio',
-			'512K',
-			],
-	},
-	{
-		'short': 'thingdev',
-		'name': 'SparkFun ESP8266 Thing Dev',
-		'opts': {
-			'.build.board': 'ESP8266_THING_DEV',
-			},
-		'macro': [
-			'nodemcu',
-			'dio',
-			'512K',
-			],
-	},
-	{
-		'short': 'esp210',
-		'name': 'SweetPea ESP-210',
-		'opts': {
-			'.build.board': 'ESP8266_ESP210',
-			},
-		'macro': [
-			'ck',
-			'qio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'd1_mini',
-		'name': 'WeMos D1 R2 & mini',
-		'opts': {
-			'.build.board': 'ESP8266_WEMOS_D1R2MINI',
-			},
-		'macro': [
-			'nodemcu',
-			'dio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'd1_mini_lite',
-		'name': 'Wemos D1 mini lite (ESP8285)',
-		'opts': {
-			'.build.board': 'ESP8266_WEMOS_D1MINILITE',
-			},
-		'macro': [
-			'nodemcu',
-			'dout',
-			'1M',
-			],
-	},
-	{
-		'short': 'd1',
-		'name': 'WeMos D1 R1',
-		'opts': {
-			'.build.board': 'ESP8266_WEMOS_D1R1',
-			},
-		'macro': [
-			'nodemcu',
-			'dio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'espino',
-		'name': 'ESPino (ESP-12 Module)',
-		'opts': {
-			'.build.board': 'ESP8266_ESP12',
-			},
-		'macro': [
-			'ck',
-			'qio',
-			'4M',
-			'fm_io',
-			]
-	},
-	{
-		'short': 'espinotee',
-		'name': 'ThaiEasyElec\'s ESPino',
-		'opts': {
-			'.build.board': 'ESP8266_ESP13',
-			},
-		'macro': [
-			'nodemcu',
-			'qio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'wifinfo',
-		'name': 'WifInfo',
-		'opts': {
-			'.build.board': 'WIFINFO',
-			'.menu.ESPModule.ESP12.build.board': 'ESP8266_ESP12',
-			},
-		'macro': [
-			'flashfreq',
-			'1M',
-			'fm_io',
-			]
-	},
-	{
-		'short': 'coredev',
-		'name': 'Core Development Module',
-		'opts': {
-			'.build.board': 'ESP8266_ESP01',
-			},
-		'macro': [
-			'flashfreq',
-			'qio',
-			'fm_io', 'fm_out',
-			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M0', '4M1M', '4M3M', '8M7M', '16M15M'
-			],
-	},
-	{
-		'short': 'arduino-esp8266',
-		'name': 'Arduino',
-		'opts': {
-			'.build.board': 'ESP8266_ARDUINO',
-			'.menu.BoardModel.starottodeved.build.board': 'ESP8266_ARDUINO_STAR_OTTO',
-			'.menu.BoardModel.primo.build.board': 'ESP8266_ARDUINO_PRIMO',
-			'.menu.BoardModel.unowifideved.build.board': 'ESP8266_ARDUINO_UNOWIFI',
-			},
-		'macro': [
-			'qio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	{
-		'short': 'gen4iod',
-		'name': '4D Systems gen4 IoD Range',
-		'opts': {
-			'.build.board': 'GEN4_IOD',
-			},
-		'macro': [
-			'qio',
-			'512K',
-			],
-	},
-	{
-		'short': 'oak',
-		'name': 'DigiStump Oak',
-		'opts': {
-			'.build.board': 'ESP8266_OAK',
-			},
-		'macro': [
-			'dio',
-			'4M',
-			'4M1M', '4M3M'
-			],
-	},
-	]
-
+################################################################
 
 uploadspeed = [
 		{ 'speed': 115200,	'os': [ '' ] }, 
@@ -596,6 +614,8 @@ uploadspeed = [
 		{ 'speed': 512000,	'os': [ '.windows' ] },
 		{ 'speed': 921600,	'os': [ '' ] },
 	]
+
+################################################################
 
 print 'menu.BoardModel=Model'
 print 'menu.UploadSpeed=Upload Speed'
