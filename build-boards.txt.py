@@ -24,7 +24,7 @@
 #			f_512K/f_1M/f_2M/f_4M:		fixed flash size
 #		selection menu:
 #			crystalfreq/flashfreq:		menus for selection crystal/flash frequency
-#			flashmode_io/flashmode_out:	menus for flashmode selection (dio/qio / dout/qout)
+#			flashmode:			menus for flashmode selection (dio/dout/qio/qout)
 #			512K/1M/2M/4M:			menus for code/SPIFFS ratio
 
 boards = [
@@ -38,7 +38,7 @@ boards = [
 			'resetmethod',
 			'cpufreq',
 			'crystalfreq', 'flashfreq', 
-			'flashmode_io', 'flashmode_out',
+			'flashmode',
 			'cpufreq',
 			'512K', '1M', '2M', '4M', '8M', '16M',
 			'lwip',
@@ -51,11 +51,11 @@ boards = [
 			'.build.board': 'ESP8266_ESP01',
 			},
 		'macro': [
-			'f_ck',
 			'f_dout',
 			'f_ff40',
 			'cpufreq',
 			'1M',
+			'resetmethod',
 			],
 	},
 	{
@@ -299,12 +299,10 @@ boards = [
 			'.build.variant': 'espino',
 			},
 		'macro': [
-			#'f_ck',
 			'f_qio',
 			'f_4M',
 			'f_ff40',
 			'cpufreq',
-			'flashmode_io',
 			'4M',
 			'resetmethod',
 			]
@@ -351,8 +349,8 @@ boards = [
 			},
 		'macro': [
 			'f_1M',
+			'f_qio',
 			'flashfreq',
-			'flashmode_io',
 			'f_ff40',
 			'cpufreq',
 			]
@@ -637,18 +635,15 @@ macros = {
 	
 	####################### menu.FlashMode
 	
-	'flashmode_io': [
-		[ '.menu.FlashMode.dio', 'DIO' ],
-		[ '.menu.FlashMode.dio.build.flash_mode', 'dio' ],
+	'flashmode': [
 		[ '.menu.FlashMode.qio', 'QIO' ],
 		[ '.menu.FlashMode.qio.build.flash_mode', 'qio' ],
-		],
-	
-	'flashmode_out': [
-		[ '.menu.FlashMode.dout', 'DOUT' ],
-		[ '.menu.FlashMode.dout.build.flash_mode', 'dout' ],
 		[ '.menu.FlashMode.qout', 'QOUT' ],
 		[ '.menu.FlashMode.qout.build.flash_mode', 'qout' ],
+		[ '.menu.FlashMode.dio', 'DIO' ],
+		[ '.menu.FlashMode.dio.build.flash_mode', 'dio' ],
+		[ '.menu.FlashMode.dout', 'DOUT' ],
+		[ '.menu.FlashMode.dout.build.flash_mode', 'dout' ],
 		],
 
 	####################### default flash_mode
