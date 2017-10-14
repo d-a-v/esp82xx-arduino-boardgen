@@ -49,10 +49,11 @@ boards = [
 			'.build.board': 'ESP8266_ESP01',
 			},
 		'macro': [
+			'resetmethod',
+			'crystalfreq',
 			'f_dout',
 			'f_ff40',
 			'1M',
-			'resetmethod',
 			],
 	},
 	{
