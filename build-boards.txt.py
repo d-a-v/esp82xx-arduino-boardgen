@@ -450,8 +450,8 @@ macros = {
 		[ '.build.debug_level', '' ],
 
 #lwip2:
-		[ '.build.lwip_include', 'lwip2/include' ],
-		[ '.build.lwip_lib', '-llwip2' ],
+#		[ '.build.lwip_include', 'lwip2/include' ],
+#		[ '.build.lwip_lib', '-llwip2' ],
 
 		],
 
@@ -732,9 +732,9 @@ macros = {
 
 	'lwip': [
 # lwip2:
-		[ '.menu.lwIPVariant.open', 'v2' ],
-		[ '.menu.lwIPVariant.open.build.lwip_include', 'lwip2/include' ],
-		[ '.menu.lwIPVariant.open.build.lwip_lib', '-llwip2' ],
+#		[ '.menu.lwIPVariant.open', 'v2' ],
+#		[ '.menu.lwIPVariant.open.build.lwip_include', 'lwip2/include' ],
+#		[ '.menu.lwIPVariant.open.build.lwip_lib', '-llwip2' ],
 
 		[ '.menu.LwIPVariant.Prebuilt', 'Prebuilt Source (gcc)' ],
 		[ '.menu.LwIPVariant.Prebuilt.build.lwip_lib', '-llwip_gcc' ],
