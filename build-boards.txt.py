@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 # board descriptor:
-# 	short
-#	name
-#	opts:	specific entries
+# 	short	short name
+#	name	display name
+#	opts:	specific entries dicts (overrides same entry in macros)
 #	macro:	common entries
 #		unmodifiable parameters:
 #			f_ck/f_nodemcu:			fixed reset method
@@ -12,8 +12,7 @@
 #		selection menu:
 #			cristalfreq/flashfreq:		menus for selection cristal/flash frequency
 #			flashmode_io/flashmode_out:	menus for flashmode selection (dio/qio / dout/qout)
-#			'512K64', '512K128', '512K0', '1M512', '1M256', '1M192', '1M160', '1M144', '1M128', '1M64', '2M0', '4M1M', '4M3M':
-#							menus for code/SPIFFS ratio
+#			512K/1M/2M/4M:			menus for code/SPIFFS ratio
 
 boards = [
 	{
@@ -114,7 +113,7 @@ boards = [
 		'name': 'Phoenix 1.0',
 		'opts': {
 			'.build.board': 'ESP8266_PHOENIX_V1',
-			'.build.variant': 'phoenix_v2',
+			'.build.variant': 'phoenix_v1',
 			},
 		'macro': [
 			'f_dio',
@@ -291,6 +290,7 @@ boards = [
 			'f_ff40',
 			'cpufreq',
 			'flashmode_io',
+			'4M',
 			'resetmethod',
 			]
 	},
@@ -299,6 +299,7 @@ boards = [
 		'name': 'ThaiEasyElec\'s ESPino',
 		'opts': {
 			'.build.board': 'ESP8266_ESP13',
+			'.build.variant': 'espinotee',
 			},
 		'macro': [
 			'f_nodemcu',
@@ -315,7 +316,23 @@ boards = [
 		'opts': {
 			'.build.board': 'WIFINFO',
 			'.build.variant': 'wifinfo',
+			'.menu.ESPModule.ESP07192': 'ESP07 (1M/192K SPIFFS)',
+			'.menu.ESPModule.ESP07192.build.board': 'ESP8266_ESP07',
+			'.menu.ESPModule.ESP07192.build.flash_size': '1M',
+			'.menu.ESPModule.ESP07192.build.flash_ld': 'eagle.flash.1m192.ld',
+			'.menu.ESPModule.ESP07192.build.spiffs_start': '0xCB000',
+			'.menu.ESPModule.ESP07192.build.spiffs_end': '0xFB000',
+			'.menu.ESPModule.ESP07192.build.spiffs_blocksize': '4096',
+			'.menu.ESPModule.ESP07192.upload.maximum_size': '827376',
+			'.menu.ESPModule.ESP12': 'ESP12 (4M/1M SPIFFS)',
 			'.menu.ESPModule.ESP12.build.board': 'ESP8266_ESP12',
+			'.menu.ESPModule.ESP12.build.flash_size': '4M',
+			'.menu.ESPModule.ESP12.build.flash_ld': 'eagle.flash.4m1m.ld',
+			'.menu.ESPModule.ESP12.build.spiffs_start': '0x300000',
+			'.menu.ESPModule.ESP12.build.spiffs_end': '0x3FB000',
+			'.menu.ESPModule.ESP12.build.spiffs_blocksize': '8192',
+			'.menu.ESPModule.ESP12.build.spiffs_pagesize': '256',
+			'.menu.ESPModule.ESP12.upload.maximum_size': '1044464',
 			},
 		'macro': [
 			'f_1M',
@@ -339,6 +356,7 @@ boards = [
 			'cpufreq',
 			'512K', '1M', '2M', '4M', '8M', '16M',
 			'resetmethod',
+			'lwip14',
 			],
 	},
 	{
@@ -346,12 +364,18 @@ boards = [
 		'name': 'Arduino',
 		'opts': {
 			'.build.board': 'ESP8266_ARDUINO',
-			'.menu.BoardModel.starottodeved.build.board': 'ESP8266_ARDUINO_STAR_OTTO',
+			'.menu.BoardModel.primo': 'Primo',
 			'.menu.BoardModel.primo.build.board': 'ESP8266_ARDUINO_PRIMO',
-			'.menu.BoardModel.unowifideved.build.board': 'ESP8266_ARDUINO_UNOWIFI',
-			'.menu.BoardModel.starottodeved.build.variant': 'arduino_uart',
 			'.menu.BoardModel.primo.build.variant': 'arduino_spi',
+			'.menu.BoardModel.primo.build.extra_flags': '-DF_CRYSTAL=40000000',
+			'.menu.BoardModel.unowifideved': 'Uno WiFi',
+			'.menu.BoardModel.unowifideved.build.board': 'ESP8266_ARDUINO_UNOWIFI',
 			'.menu.BoardModel.unowifideved.build.variant': 'arduino_uart',
+			'.menu.BoardModel.unowifideved.build.extra_flags=-DF_CRYSTAL': '40000000',
+			'.menu.BoardModel.starottodeved': 'Star OTTO',
+			'.menu.BoardModel.starottodeved.build.variant': 'arduino_uart',
+			'.menu.BoardModel.starottodeved.build.board': 'ESP8266_ARDUINO_STAR_OTTO',
+			'.menu.BoardModel.starottodeved.build.extra_flags': '-DF_CRYSTAL=40000000',
 			},
 		'macro': [
 			'f_qio',
@@ -366,6 +390,7 @@ boards = [
 		'name': '4D Systems gen4 IoD Range',
 		'opts': {
 			'.build.board': 'GEN4_IOD',
+			'.build.f_cpu': '160000000L',
 			},
 		'macro': [
 			'f_qio',
@@ -379,6 +404,8 @@ boards = [
 		'name': 'DigiStump Oak',
 		'opts': {
 			'.build.board': 'ESP8266_OAK',
+			'.build.variant': 'oak',
+			'.upload.maximum_size': '1040368',
 			},
 		'macro': [
 			'f_dio',
@@ -396,7 +423,6 @@ macros = {
 	'defaults': [
 		[ '.upload.tool', 'esptool' ],
 		[ '.upload.speed', '115200' ],
-		[ '.upload.maximum_size', '434160' ],
 		[ '.upload.maximum_data_size', '81920' ],
 		[ '.upload.wait_for_upload_port', 'true' ],
 		[ '.serial.disableDTR', 'true' ],
@@ -531,6 +557,10 @@ macros = {
 		[ '.menu.FlashSize.1M64.build.spiffs_end', '0xFB000' ],
 		[ '.menu.FlashSize.1M64.build.spiffs_blocksize', '4096' ],
 		[ '.menu.FlashSize.1M64.upload.maximum_size', '958448' ],
+		[ '.menu.FlashSize.1M0', '1M (no SPIFFS)' ],
+		[ '.menu.FlashSize.1M0.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M0.build.flash_ld', 'eagle.flash.1m0.ld' ],
+		[ '.menu.FlashSize.1M0.upload.maximum_size', '1023984' ],
 		],
 	'2M': [
 		[ '.menu.FlashSize.2M', '2M (1M SPIFFS)' ],
@@ -584,18 +614,22 @@ macros = {
 	
 	'f_512K': [
 		[ '.build.flash_size', '512k' ],
+		[ '.upload.maximum_size', '434160' ],
 		],
 		
 	'f_1M': [
 		[ '.build.flash_size', '1M' ],
+		[ '.upload.maximum_size', '1044464' ],
 		],
 		
 	'f_2M': [
 		[ '.build.flash_size', '2M' ],
+		[ '.upload.maximum_size', '1044464' ],
 		],
 		
 	'f_4M': [
 		[ '.build.flash_size', '4M' ],
+		[ '.upload.maximum_size', '1044464' ],
 		],
 	
 	####################### menu.FlashMode
@@ -675,6 +709,20 @@ macros = {
 		[ '.menu.DebugLevel.all_____.build.debug_level', '-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_TLS_MEM' ],
 		],
 
+	####################### debug
+
+	'lwip14': [
+		[ '.menu.LwIPVariant.Espressif', 'Espressif (xcc)' ],
+		[ '.menu.LwIPVariant.Espressif.build.lwip_lib', '-llwip' ],
+		[ '.menu.LwIPVariant.Espressif.build.lwip_flags', '-DLWIP_MAYBE_XCC' ],
+		[ '.menu.LwIPVariant.Prebuilt', 'Prebuilt Source (gcc)' ],
+		[ '.menu.LwIPVariant.Prebuilt.build.lwip_lib', '-llwip_gcc' ],
+		[ '.menu.LwIPVariant.Prebuilt.build.lwip_flags', '-DLWIP_OPEN_SRC' ],
+		[ '.menu.LwIPVariant.OpenSource', 'Open Source (gcc)' ],
+		[ '.menu.LwIPVariant.OpenSource.build.lwip_lib', '-llwip_src' ],
+		[ '.menu.LwIPVariant.OpenSource.build.lwip_flags', '-DLWIP_OPEN_SRC' ],
+		[ '.menu.LwIPVariant.OpenSource.recipe.hooks.sketch.prebuild.1.pattern', 'make -C "{runtime.platform.path}/tools/sdk/lwip/src" install TOOLS_PATH="{runtime.tools.xtensa-lx106-elf-gcc.path}/bin/xtensa-lx106-elf-"' ],
+		],
 	}
 
 ################################################################
