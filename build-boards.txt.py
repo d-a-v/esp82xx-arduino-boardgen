@@ -23,7 +23,7 @@
 #			f_qio/f_dio/f_qout/f_dout:	fixed flash mode
 #			f_512K/f_1M/f_2M/f_4M:		fixed flash size
 #		selection menu:
-#			cristalfreq/flashfreq:		menus for selection cristal/flash frequency
+#			crystalfreq/flashfreq:		menus for selection crystal/flash frequency
 #			flashmode_io/flashmode_out:	menus for flashmode selection (dio/qio / dout/qout)
 #			512K/1M/2M/4M:			menus for code/SPIFFS ratio
 
@@ -37,7 +37,7 @@ boards = [
 		'macro': [
 			'resetmethod',
 			'cpufreq',
-			'cristalfreq', 'flashfreq', 
+			'crystalfreq', 'flashfreq', 
 			'flashmode_io', 'flashmode_out',
 			'cpufreq',
 			'512K', '1M', '2M', '4M', '8M', '16M',
@@ -448,7 +448,7 @@ macros = {
 		[ '.menu.CpuFrequency.160.build.f_cpu', '160000000L' ],
 		],
 	
-	'cristalfreq': [
+	'crystalfreq': [
 		[ '.menu.CrystalFreq.26', '26 MHz' ],
 		[ '.menu.CrystalFreq.40', '40 MHz' ],
 		[ '.menu.CrystalFreq.40.build.extra_flags', '-DF_CRYSTAL=40000000' ],
