@@ -822,7 +822,7 @@ for board in boards:
 	macrolist = [ 'defaults' ]
 	if 'macro' in board:
 		macrolist += board['macro']
-	macrolist += [ 'lwip', 'debug' ]
+	macrolist += [ 'cristalfreq', 'flashfreq', 'lwip', 'debug' ]
 	for block in macrolist:
 		for keyval in macros[block]:
 			if not ('opts' in board) or not (keyval[0] in board['opts']):
