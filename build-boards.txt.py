@@ -32,15 +32,16 @@ boards = [
 		'short': 'generic',
 		'name': 'Generic ESP8266 Module',
 		'opts': {
-			'.build.board': 'ESP8266_ESP01',
-			'.upload.tool': 'toto',
+			'.build.board': 'ESP8266_GENERIC',
 			},
 		'macro': [
 			'resetmethod',
 			'cpufreq',
 			'cristalfreq', 'flashfreq', 
 			'flashmode_io', 'flashmode_out',
-			'512K', '1M', '2M', '4M',
+			'cpufreq',
+			'512K', '1M', '2M', '4M', '8M', '16M',
+			'lwip',
 			],
 	},
 	{
@@ -261,7 +262,7 @@ boards = [
 	},
 	{
 		'short': 'd1_mini_lite',
-		'name': 'Wemos D1 mini lite (ESP8285)',
+		'name': 'Wemos D1 mini lite',
 		'opts': {
 			'.build.board': 'ESP8266_WEMOS_D1MINILITE',
 			},
@@ -355,23 +356,6 @@ boards = [
 			'f_ff40',
 			'cpufreq',
 			]
-	},
-	{
-		'short': 'coredev',
-		'name': 'Core Development Module',
-		'opts': {
-			'.build.board': 'ESP8266_ESP01',
-			},
-		'macro': [
-			'f_qio',
-			'flashfreq',
-			'flashmode_io', 'flashmode_out',
-			'f_ff40',
-			'cpufreq',
-			'512K', '1M', '2M', '4M', '8M', '16M',
-			'resetmethod',
-			'lwip',
-			],
 	},
 	{
 		'short': 'arduino-esp8266',
@@ -527,48 +511,10 @@ macros = {
 		[ '.menu.FlashSize.512K128.upload.maximum_size', '368624' ],
 		],
 	'1M': [
-		[ '.menu.FlashSize.1M512', '1M (512K SPIFFS)' ],
-		[ '.menu.FlashSize.1M512.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M512.build.flash_ld', 'eagle.flash.1m512.ld' ],
-		[ '.menu.FlashSize.1M512.build.spiffs_start', '0x7B000' ],
-		[ '.menu.FlashSize.1M512.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M512.build.spiffs_blocksize', '8192' ],
-		[ '.menu.FlashSize.1M512.upload.maximum_size', '499696' ],
-		[ '.menu.FlashSize.1M256', '1M (256K SPIFFS)' ],
-		[ '.menu.FlashSize.1M256.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M256.build.flash_ld', 'eagle.flash.1m256.ld' ],
-		[ '.menu.FlashSize.1M256.build.spiffs_start', '0xBB000' ],
-		[ '.menu.FlashSize.1M256.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M256.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M256.upload.maximum_size', '761840' ],
-		[ '.menu.FlashSize.1M192', '1M (192K SPIFFS)' ],
-		[ '.menu.FlashSize.1M192.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M192.build.flash_ld', 'eagle.flash.1m192.ld' ],
-		[ '.menu.FlashSize.1M192.build.spiffs_start', '0xCB000' ],
-		[ '.menu.FlashSize.1M192.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M192.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M192.upload.maximum_size', '827376' ],
-		[ '.menu.FlashSize.1M160', '1M (160K SPIFFS)' ],
-		[ '.menu.FlashSize.1M160.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M160.build.flash_ld', 'eagle.flash.1m160.ld' ],
-		[ '.menu.FlashSize.1M160.build.spiffs_start', '0xD3000' ],
-		[ '.menu.FlashSize.1M160.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M160.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M160.upload.maximum_size', '860144' ],
-		[ '.menu.FlashSize.1M144', '1M (144K SPIFFS)' ],
-		[ '.menu.FlashSize.1M144.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M144.build.flash_ld', 'eagle.flash.1m144.ld' ],
-		[ '.menu.FlashSize.1M144.build.spiffs_start', '0xD7000' ],
-		[ '.menu.FlashSize.1M144.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M144.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M144.upload.maximum_size', '876528' ],
-		[ '.menu.FlashSize.1M128', '1M (128K SPIFFS)' ],
-		[ '.menu.FlashSize.1M128.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M128.build.flash_ld', 'eagle.flash.1m128.ld' ],
-		[ '.menu.FlashSize.1M128.build.spiffs_start', '0xDB000' ],
-		[ '.menu.FlashSize.1M128.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M128.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M128.upload.maximum_size', '892912' ],
+		[ '.menu.FlashSize.1M0', '1M (no SPIFFS)' ],
+		[ '.menu.FlashSize.1M0.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M0.build.flash_ld', 'eagle.flash.1m0.ld' ],
+		[ '.menu.FlashSize.1M0.upload.maximum_size', '1023984' ],
 		[ '.menu.FlashSize.1M64', '1M (64K SPIFFS)' ],
 		[ '.menu.FlashSize.1M64.build.flash_size', '1M' ],
 		[ '.menu.FlashSize.1M64.build.flash_ld', 'eagle.flash.1m64.ld' ],
@@ -576,10 +522,48 @@ macros = {
 		[ '.menu.FlashSize.1M64.build.spiffs_end', '0xFB000' ],
 		[ '.menu.FlashSize.1M64.build.spiffs_blocksize', '4096' ],
 		[ '.menu.FlashSize.1M64.upload.maximum_size', '958448' ],
-		[ '.menu.FlashSize.1M0', '1M (no SPIFFS)' ],
-		[ '.menu.FlashSize.1M0.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M0.build.flash_ld', 'eagle.flash.1m0.ld' ],
-		[ '.menu.FlashSize.1M0.upload.maximum_size', '1023984' ],
+		[ '.menu.FlashSize.1M128', '1M (128K SPIFFS)' ],
+		[ '.menu.FlashSize.1M128.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M128.build.flash_ld', 'eagle.flash.1m128.ld' ],
+		[ '.menu.FlashSize.1M128.build.spiffs_start', '0xDB000' ],
+		[ '.menu.FlashSize.1M128.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M128.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M128.upload.maximum_size', '892912' ],
+		[ '.menu.FlashSize.1M144', '1M (144K SPIFFS)' ],
+		[ '.menu.FlashSize.1M144.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M144.build.flash_ld', 'eagle.flash.1m144.ld' ],
+		[ '.menu.FlashSize.1M144.build.spiffs_start', '0xD7000' ],
+		[ '.menu.FlashSize.1M144.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M144.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M144.upload.maximum_size', '876528' ],
+		[ '.menu.FlashSize.1M160', '1M (160K SPIFFS)' ],
+		[ '.menu.FlashSize.1M160.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M160.build.flash_ld', 'eagle.flash.1m160.ld' ],
+		[ '.menu.FlashSize.1M160.build.spiffs_start', '0xD3000' ],
+		[ '.menu.FlashSize.1M160.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M160.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M160.upload.maximum_size', '860144' ],
+		[ '.menu.FlashSize.1M192', '1M (192K SPIFFS)' ],
+		[ '.menu.FlashSize.1M192.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M192.build.flash_ld', 'eagle.flash.1m192.ld' ],
+		[ '.menu.FlashSize.1M192.build.spiffs_start', '0xCB000' ],
+		[ '.menu.FlashSize.1M192.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M192.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M192.upload.maximum_size', '827376' ],
+		[ '.menu.FlashSize.1M256', '1M (256K SPIFFS)' ],
+		[ '.menu.FlashSize.1M256.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M256.build.flash_ld', 'eagle.flash.1m256.ld' ],
+		[ '.menu.FlashSize.1M256.build.spiffs_start', '0xBB000' ],
+		[ '.menu.FlashSize.1M256.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M256.build.spiffs_blocksize', '4096' ],
+		[ '.menu.FlashSize.1M256.upload.maximum_size', '761840' ],
+		[ '.menu.FlashSize.1M512', '1M (512K SPIFFS)' ],
+		[ '.menu.FlashSize.1M512.build.flash_size', '1M' ],
+		[ '.menu.FlashSize.1M512.build.flash_ld', 'eagle.flash.1m512.ld' ],
+		[ '.menu.FlashSize.1M512.build.spiffs_start', '0x7B000' ],
+		[ '.menu.FlashSize.1M512.build.spiffs_end', '0xFB000' ],
+		[ '.menu.FlashSize.1M512.build.spiffs_blocksize', '8192' ],
+		[ '.menu.FlashSize.1M512.upload.maximum_size', '499696' ],
 		],
 	'2M': [
 		[ '.menu.FlashSize.2M', '2M (1M SPIFFS)' ],
@@ -794,35 +778,7 @@ for board in boards:
 	macrolist = [ 'defaults' ]
 	if 'macro' in board:
 		macrolist += board['macro']
-	for block in macrolist:
-		for keyval in macros[block]:
-			if not ('opts' in board) or not (keyval[0] in board['opts']):
-				print short + keyval[0] + '=' + keyval[1]
-
-	# serial speed					
-	for uspeed in uploadspeed:
-		for os in uspeed['os']:
-			speed=uspeed['speed']
-			print short + '.menu.UploadSpeed.' + str(speed) + os + '=' + str(speed)
-			print short + '.menu.UploadSpeed.' + str(speed) + '.upload.speed=' + str(speed)
-	
-	print ''
-
-for board in boards:
-	print '##############################################################'
-	short=board['short'] + '-debug'
-	print short + '.name=' + board['name'] + " (debug)"
-
-	# standalone options
-	if 'opts' in board:
-		for opt in board['opts']:
-			print short + opt + '=' + board['opts'][opt]
-	
-	# macros
-	macrolist = [ 'defaults' ]
-	if 'macro' in board:
-		macrolist += board['macro']
-	macrolist += [ 'cristalfreq', 'flashfreq', 'lwip', 'debug' ]
+	macrolist += [ 'debug' ]
 	for block in macrolist:
 		for keyval in macros[block]:
 			if not ('opts' in board) or not (keyval[0] in board['opts']):
