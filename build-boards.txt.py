@@ -25,7 +25,7 @@
 #		selection menu:
 #			crystalfreq/flashfreq:		menus for selection crystal/flash frequency
 #			flashmode:			menus for flashmode selection (dio/dout/qio/qout)
-#			512K/1M/2M/4M:			menus for code/SPIFFS ratio
+#			512K/1M/2M/4M/8M/16M:		menus for code/SPIFFS ratio
 
 boards = [
 	{
@@ -36,10 +36,8 @@ boards = [
 			},
 		'macro': [
 			'resetmethod',
-			'cpufreq',
 			'crystalfreq', 'flashfreq', 
 			'flashmode',
-			'cpufreq',
 			'512K', '1M', '2M', '4M', '8M', '16M',
 			'lwip',
 			],
@@ -53,7 +51,6 @@ boards = [
 		'macro': [
 			'f_dout',
 			'f_ff40',
-			'cpufreq',
 			'1M',
 			'resetmethod',
 			],
@@ -68,9 +65,7 @@ boards = [
 		'macro': [
 			'f_ck',
 			'f_dio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			],
 	},
@@ -84,9 +79,7 @@ boards = [
 		'macro': [
 			'f_nodemcu',
 			'f_qio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			],
 	},
@@ -99,9 +92,7 @@ boards = [
 			},
 		'macro': [
 			'f_dio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			'resetmethod',
 			],
@@ -115,9 +106,7 @@ boards = [
 			},
 		'macro': [
 			'f_dio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			'resetmethod',
 			],
@@ -131,9 +120,7 @@ boards = [
 			},
 		'macro': [
 			'f_dio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			'resetmethod',
 			],
@@ -147,9 +134,7 @@ boards = [
 			},
 		'macro': [
 			'f_dio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			'resetmethod',
 			],
@@ -164,9 +149,7 @@ boards = [
 		'macro': [
 			'f_nodemcu',
 			'f_qio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			],
 	},
@@ -180,9 +163,7 @@ boards = [
 		'macro': [
 			'f_nodemcu',
 			'f_dio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			],
 	},
@@ -196,8 +177,7 @@ boards = [
 			'f_ck',
 			'f_qio',
 			'f_ff40',
-			'cpufreq',
-			'f_2M',
+			'2M',
 			],
 	},
 	{
@@ -211,8 +191,7 @@ boards = [
 			'f_ck',
 			'f_qio',
 			'f_ff40',
-			'cpufreq',
-			'f_512K',
+			'512K',
 			],
 	},
 	{
@@ -225,8 +204,7 @@ boards = [
 		'macro': [
 			'f_nodemcu',
 			'f_dio',
-			'cpufreq',
-			'f_512K',
+			'512K',
 			],
 	},
 	{
@@ -238,9 +216,7 @@ boards = [
 		'macro': [
 			'f_ck',
 			'f_qio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			],
 	},
@@ -254,9 +230,7 @@ boards = [
 		'macro': [
 			'f_nodemcu',
 			'f_dio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			],
 	},
@@ -269,9 +243,7 @@ boards = [
 		'macro': [
 			'f_nodemcu',
 			'f_dout',
-			'f_1M',
 			'f_ff40',
-			'cpufreq',
 			'1M',
 			],
 	},
@@ -285,9 +257,7 @@ boards = [
 		'macro': [
 			'f_nodemcu',
 			'f_dio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			],
 	},
@@ -300,9 +270,7 @@ boards = [
 			},
 		'macro': [
 			'f_qio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			'resetmethod',
 			]
@@ -317,9 +285,7 @@ boards = [
 		'macro': [
 			'f_nodemcu',
 			'f_qio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			],
 	},
@@ -348,11 +314,10 @@ boards = [
 			'.menu.ESPModule.ESP12.upload.maximum_size': '1044464',
 			},
 		'macro': [
-			'f_1M',
 			'f_qio',
 			'flashfreq',
 			'f_ff40',
-			'cpufreq',
+			'1M',
 			]
 	},
 	{
@@ -375,9 +340,7 @@ boards = [
 			},
 		'macro': [
 			'f_qio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			],
 	},
@@ -390,9 +353,8 @@ boards = [
 			},
 		'macro': [
 			'f_qio',
-			'f_512K',
 			'f_ff80',
-			'cpufreq',
+			'512K',
 			],
 	},
 	{
@@ -405,9 +367,7 @@ boards = [
 			},
 		'macro': [
 			'f_dio',
-			'f_4M',
 			'f_ff40',
-			'cpufreq',
 			'4M',
 			],
 	},
@@ -612,7 +572,7 @@ macros = {
 		],
 	
 	####################### default flash size
-	
+# f_SIZE are not used anymore
 	'f_512K': [
 		[ '.build.flash_size', '512k' ],
 		[ '.upload.maximum_size', '434160' ],
@@ -770,7 +730,7 @@ for board in boards:
 			print short + opt + '=' + board['opts'][opt]
 	
 	# macros
-	macrolist = [ 'defaults' ]
+	macrolist = [ 'defaults', 'cpufreq', ]
 	if 'macro' in board:
 		macrolist += board['macro']
 	macrolist += [ 'debug' ]
