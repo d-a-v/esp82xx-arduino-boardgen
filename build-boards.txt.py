@@ -1,5 +1,18 @@
 #!/usr/bin/env python
 
+# boards.txt python builder for esp8266/Arduino
+# Copyright (C) 2017 community
+# Permission is hereby granted, free of charge, to any person who buy it,
+# use it, break it, fix it, trash it, change it, mail - upgrade it, charge
+# it, point it, zoom it, press it, snap it, work it, quick - erase it, write
+# it, cut it, paste it, save it, load it, check it, quick - rewrite it, plug
+# it, play it, burn it, rip it, drag and drop it, zip - unzip it, lock it,
+# fill it, call it, find it, view it, code it, jam - unlock it, surf it,
+# scroll it, pause it, click it, cross it, crack it, switch - update it,
+# name it, rate it, tune it, print it, scan it, send it, fax - rename it,
+# touch it, bring it, pay it, watch it, turn it, leave it, start - format
+# it.
+
 # board descriptor:
 # 	short	short name
 #	name	display name
@@ -255,9 +268,10 @@ boards = [
 		'macro': [
 			'f_nodemcu',
 			'f_dout',
+			'f_1M',
 			'f_ff40',
 			'cpufreq',
-			'f_1M',
+			'1M',
 			],
 	},
 	{
@@ -356,7 +370,7 @@ boards = [
 			'cpufreq',
 			'512K', '1M', '2M', '4M', '8M', '16M',
 			'resetmethod',
-			'lwip14',
+			'lwip',
 			],
 	},
 	{
@@ -434,6 +448,11 @@ macros = {
 		[ '.build.spiffs_pagesize', '256' ],
 		[ '.build.debug_port', '' ],
 		[ '.build.debug_level', '' ],
+
+#lwip2:
+		[ '.build.lwip_include', 'lwip2/include' ],
+		[ '.build.lwip_lib', '-llwip2' ],
+
 		],
 
 	#######################
@@ -711,18 +730,24 @@ macros = {
 
 	####################### debug
 
-	'lwip14': [
-		[ '.menu.LwIPVariant.Espressif', 'Espressif (xcc)' ],
-		[ '.menu.LwIPVariant.Espressif.build.lwip_lib', '-llwip' ],
-		[ '.menu.LwIPVariant.Espressif.build.lwip_flags', '-DLWIP_MAYBE_XCC' ],
+	'lwip': [
+# lwip2:
+		[ '.menu.lwIPVariant.open', 'v2' ],
+		[ '.menu.lwIPVariant.open.build.lwip_include', 'lwip2/include' ],
+		[ '.menu.lwIPVariant.open.build.lwip_lib', '-llwip2' ],
+
 		[ '.menu.LwIPVariant.Prebuilt', 'Prebuilt Source (gcc)' ],
 		[ '.menu.LwIPVariant.Prebuilt.build.lwip_lib', '-llwip_gcc' ],
 		[ '.menu.LwIPVariant.Prebuilt.build.lwip_flags', '-DLWIP_OPEN_SRC' ],
+		[ '.menu.LwIPVariant.Espressif', 'Espressif (xcc)' ],
+		[ '.menu.LwIPVariant.Espressif.build.lwip_lib', '-llwip' ],
+		[ '.menu.LwIPVariant.Espressif.build.lwip_flags', '-DLWIP_MAYBE_XCC' ],
 		[ '.menu.LwIPVariant.OpenSource', 'Open Source (gcc)' ],
 		[ '.menu.LwIPVariant.OpenSource.build.lwip_lib', '-llwip_src' ],
 		[ '.menu.LwIPVariant.OpenSource.build.lwip_flags', '-DLWIP_OPEN_SRC' ],
 		[ '.menu.LwIPVariant.OpenSource.recipe.hooks.sketch.prebuild.1.pattern', 'make -C "{runtime.platform.path}/tools/sdk/lwip/src" install TOOLS_PATH="{runtime.tools.xtensa-lx106-elf-gcc.path}/bin/xtensa-lx106-elf-"' ],
 		],
+
 	}
 
 ################################################################
@@ -736,7 +761,7 @@ uploadspeed = [
 		{ 'speed': 460800,	'os': [ '.linux', '.macosx' ] },
 		{ 'speed': 512000,	'os': [ '.windows' ] },
 		{ 'speed': 921600,	'os': [ '' ] },
-	]
+		]
 
 ################################################################
 
@@ -769,7 +794,35 @@ for board in boards:
 	macrolist = [ 'defaults' ]
 	if 'macro' in board:
 		macrolist += board['macro']
-	macrolist += [ 'debug' ]
+	for block in macrolist:
+		for keyval in macros[block]:
+			if not ('opts' in board) or not (keyval[0] in board['opts']):
+				print short + keyval[0] + '=' + keyval[1]
+
+	# serial speed					
+	for uspeed in uploadspeed:
+		for os in uspeed['os']:
+			speed=uspeed['speed']
+			print short + '.menu.UploadSpeed.' + str(speed) + os + '=' + str(speed)
+			print short + '.menu.UploadSpeed.' + str(speed) + '.upload.speed=' + str(speed)
+	
+	print ''
+
+for board in boards:
+	print '##############################################################'
+	short=board['short'] + '-debug'
+	print short + '.name=' + board['name'] + " (debug)"
+
+	# standalone options
+	if 'opts' in board:
+		for opt in board['opts']:
+			print short + opt + '=' + board['opts'][opt]
+	
+	# macros
+	macrolist = [ 'defaults' ]
+	if 'macro' in board:
+		macrolist += board['macro']
+	macrolist += [ 'lwip', 'debug' ]
 	for block in macrolist:
 		for keyval in macros[block]:
 			if not ('opts' in board) or not (keyval[0] in board['opts']):
