@@ -446,153 +446,6 @@ macros = {
 		[ '.upload.resetmethod', 'nodemcu' ],
 		],
 
-	####################### menu.FlashSize
-
-	'512K': [
-		[ '.menu.FlashSize.512K0', '512K (no SPIFFS)' ],
-		[ '.menu.FlashSize.512K0.build.flash_size', '512K' ],
-		[ '.menu.FlashSize.512K0.build.flash_ld', 'eagle.flash.512k0.ld' ],
-		[ '.menu.FlashSize.512K0.upload.maximum_size', '499696' ],
-		[ '.menu.FlashSize.512K64', '512K (64K SPIFFS)' ],
-		[ '.menu.FlashSize.512K64.build.flash_size', '512K' ],
-		[ '.menu.FlashSize.512K64.build.flash_ld', 'eagle.flash.512k64.ld' ],
-		[ '.menu.FlashSize.512K64.build.spiffs_start', '0x6B000' ],
-		[ '.menu.FlashSize.512K64.build.spiffs_end', '0x7B000' ],
-		[ '.menu.FlashSize.512K64.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.512K64.upload.maximum_size', '434160' ],
-		[ '.menu.FlashSize.512K128', '512K (128K SPIFFS)' ],
-		[ '.menu.FlashSize.512K128.build.flash_size', '512K' ],
-		[ '.menu.FlashSize.512K128.build.flash_ld', 'eagle.flash.512k128.ld' ],
-		[ '.menu.FlashSize.512K128.build.spiffs_start', '0x5B000' ],
-		[ '.menu.FlashSize.512K128.build.spiffs_end', '0x7B000' ],
-		[ '.menu.FlashSize.512K128.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.512K128.upload.maximum_size', '368624' ],
-		],
-	'1M': [
-		[ '.menu.FlashSize.1M0', '1M (no SPIFFS)' ],
-		[ '.menu.FlashSize.1M0.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M0.build.flash_ld', 'eagle.flash.1m0.ld' ],
-		[ '.menu.FlashSize.1M0.upload.maximum_size', '1023984' ],
-		[ '.menu.FlashSize.1M64', '1M (64K SPIFFS)' ],
-		[ '.menu.FlashSize.1M64.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M64.build.flash_ld', 'eagle.flash.1m64.ld' ],
-		[ '.menu.FlashSize.1M64.build.spiffs_start', '0xEB000' ],
-		[ '.menu.FlashSize.1M64.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M64.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M64.upload.maximum_size', '958448' ],
-		[ '.menu.FlashSize.1M128', '1M (128K SPIFFS)' ],
-		[ '.menu.FlashSize.1M128.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M128.build.flash_ld', 'eagle.flash.1m128.ld' ],
-		[ '.menu.FlashSize.1M128.build.spiffs_start', '0xDB000' ],
-		[ '.menu.FlashSize.1M128.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M128.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M128.upload.maximum_size', '892912' ],
-		[ '.menu.FlashSize.1M144', '1M (144K SPIFFS)' ],
-		[ '.menu.FlashSize.1M144.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M144.build.flash_ld', 'eagle.flash.1m144.ld' ],
-		[ '.menu.FlashSize.1M144.build.spiffs_start', '0xD7000' ],
-		[ '.menu.FlashSize.1M144.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M144.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M144.upload.maximum_size', '876528' ],
-		[ '.menu.FlashSize.1M160', '1M (160K SPIFFS)' ],
-		[ '.menu.FlashSize.1M160.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M160.build.flash_ld', 'eagle.flash.1m160.ld' ],
-		[ '.menu.FlashSize.1M160.build.spiffs_start', '0xD3000' ],
-		[ '.menu.FlashSize.1M160.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M160.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M160.upload.maximum_size', '860144' ],
-		[ '.menu.FlashSize.1M192', '1M (192K SPIFFS)' ],
-		[ '.menu.FlashSize.1M192.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M192.build.flash_ld', 'eagle.flash.1m192.ld' ],
-		[ '.menu.FlashSize.1M192.build.spiffs_start', '0xCB000' ],
-		[ '.menu.FlashSize.1M192.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M192.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M192.upload.maximum_size', '827376' ],
-		[ '.menu.FlashSize.1M256', '1M (256K SPIFFS)' ],
-		[ '.menu.FlashSize.1M256.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M256.build.flash_ld', 'eagle.flash.1m256.ld' ],
-		[ '.menu.FlashSize.1M256.build.spiffs_start', '0xBB000' ],
-		[ '.menu.FlashSize.1M256.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M256.build.spiffs_blocksize', '4096' ],
-		[ '.menu.FlashSize.1M256.upload.maximum_size', '761840' ],
-		[ '.menu.FlashSize.1M512', '1M (512K SPIFFS)' ],
-		[ '.menu.FlashSize.1M512.build.flash_size', '1M' ],
-		[ '.menu.FlashSize.1M512.build.flash_ld', 'eagle.flash.1m512.ld' ],
-		[ '.menu.FlashSize.1M512.build.spiffs_start', '0x7B000' ],
-		[ '.menu.FlashSize.1M512.build.spiffs_end', '0xFB000' ],
-		[ '.menu.FlashSize.1M512.build.spiffs_blocksize', '8192' ],
-		[ '.menu.FlashSize.1M512.upload.maximum_size', '499696' ],
-		],
-	'2M': [
-		[ '.menu.FlashSize.2M', '2M (1M SPIFFS)' ],
-		[ '.menu.FlashSize.2M.build.flash_size', '2M' ],
-		[ '.menu.FlashSize.2M.build.flash_ld', 'eagle.flash.2m.ld' ],
-		[ '.menu.FlashSize.2M.build.spiffs_start', '0x100000' ],
-		[ '.menu.FlashSize.2M.build.spiffs_end', '0x1FB000' ],
-		[ '.menu.FlashSize.2M.build.spiffs_blocksize', '8192' ],
-		[ '.menu.FlashSize.2M.upload.maximum_size', '1044464' ],
-		],
-	'4M': [
-		[ '.menu.FlashSize.4M1M', '4M (1M SPIFFS)' ],
-		[ '.menu.FlashSize.4M1M.build.flash_size', '4M' ],
-		[ '.menu.FlashSize.4M1M.build.flash_ld', 'eagle.flash.4m1m.ld' ],
-		[ '.menu.FlashSize.4M1M.build.spiffs_start', '0x300000' ],
-		[ '.menu.FlashSize.4M1M.build.spiffs_end', '0x3FB000' ],
-		[ '.menu.FlashSize.4M1M.build.spiffs_blocksize', '8192' ],
-		[ '.menu.FlashSize.4M1M.build.spiffs_pagesize', '256' ],
-		[ '.menu.FlashSize.4M1M.upload.maximum_size', '1044464' ],
-		[ '.menu.FlashSize.4M3M', '4M (3M SPIFFS)' ],
-		[ '.menu.FlashSize.4M3M.build.flash_size', '4M' ],
-		[ '.menu.FlashSize.4M3M.build.flash_ld', 'eagle.flash.4m.ld' ],
-		[ '.menu.FlashSize.4M3M.build.spiffs_start', '0x100000' ],
-		[ '.menu.FlashSize.4M3M.build.spiffs_end', '0x3FB000' ],
-		[ '.menu.FlashSize.4M3M.build.spiffs_pagesize', '256' ],
-		[ '.menu.FlashSize.4M3M.build.spiffs_blocksize', '8192' ],
-		[ '.menu.FlashSize.4M3M.upload.maximum_size', '1044464' ],
-		],
-	'8M': [
-		[ '.menu.FlashSize.8M7M', '8M (7M SPIFFS)' ],
-		[ '.menu.FlashSize.8M7M.build.flash_size', '8M' ],
-		[ '.menu.FlashSize.8M7M.build.flash_ld', 'eagle.flash.8m.ld' ],
-		[ '.menu.FlashSize.8M7M.build.spiffs_start', '0x100000' ],
-		[ '.menu.FlashSize.8M7M.build.spiffs_end', '0x7FB000' ],
-		[ '.menu.FlashSize.8M7M.build.spiffs_pagesize', '256' ],
-		[ '.menu.FlashSize.8M7M.build.spiffs_blocksize', '8192' ],
-		[ '.menu.FlashSize.8M7M.upload.maximum_size', '1044464' ],
-		],
-	'16M': [
-		[ '.menu.FlashSize.16M15M', '16M (15M SPIFFS)' ],
-		[ '.menu.FlashSize.16M15M.build.flash_size', '16M' ],
-		[ '.menu.FlashSize.16M15M.build.flash_ld', 'eagle.flash.16m.ld' ],
-		[ '.menu.FlashSize.16M15M.build.spiffs_start', '0x100000' ],
-		[ '.menu.FlashSize.16M15M.build.spiffs_end', '0x17FB000' ],
-		[ '.menu.FlashSize.16M15M.build.spiffs_pagesize', '256' ],
-		[ '.menu.FlashSize.16M15M.build.spiffs_blocksize', '8192' ],
-		[ '.menu.FlashSize.16M15M.upload.maximum_size', '1044464' ],
-		],
-	
-	####################### default flash size
-# f_SIZE are not used anymore
-	'f_512K': [
-		[ '.build.flash_size', '512k' ],
-		[ '.upload.maximum_size', '434160' ],
-		],
-		
-	'f_1M': [
-		[ '.build.flash_size', '1M' ],
-		[ '.upload.maximum_size', '1044464' ],
-		],
-		
-	'f_2M': [
-		[ '.build.flash_size', '2M' ],
-		[ '.upload.maximum_size', '1044464' ],
-		],
-		
-	'f_4M': [
-		[ '.build.flash_size', '4M' ],
-		[ '.upload.maximum_size', '1044464' ],
-		],
-	
 	####################### menu.FlashMode
 	
 	'flashmode': [
@@ -703,6 +556,56 @@ uploadspeed = [
 		]
 
 ################################################################
+
+def flash_size (display, optname, ld, desc, max_upload_size, spiffs_start, spiffs_size, spiffs_blocksize):
+	menu = '.menu.FlashSize.' + optname
+	menub = menu + '.build.'
+	d = [
+		[ menu, display + ' (' + desc + ')' ],
+		[ menub + 'flash_size', display ],
+		[ menub + 'flash_ld', ld ],
+		[ menub + 'spiffs_pagesize', '256' ],
+		[ menu + '.upload.maximum_size', "%i" % max_upload_size ],
+		]
+	if spiffs_start > 0:
+		d += [
+			[ menub + 'spiffs_start', "0x%05X" % spiffs_start ],
+			[ menub + 'spiffs_end', "0x%05X" % (spiffs_start + spiffs_size) ],
+			[ menub + 'spiffs_blocksize', "%i" % spiffs_blocksize ],
+			]
+	return d
+		
+def all_flash_size ():
+	return { '512K': 
+		  flash_size('512K', '512K0',   'eagle.flash.512k0.ld',     'no SPIFFS', 499696, 0, 0, 0)
+		+ flash_size('512K', '512K64',  'eagle.flash.512k64.ld',   '64K SPIFFS', 434160, 0x6B000, 0x10000, 4096)
+		+ flash_size('512K', '512K128', 'eagle.flash.512k128.ld', '128K SPIFFS', 368624, 0x5B000, 0x20000, 4096)
+		,
+		'1M':
+		  flash_size('1M', '1M0',   'eagle.flash.1m0.ld',     'no SPIFFS', 1023984, 0, 0, 0)
+		+ flash_size('1M', '1M64',  'eagle.flash.1m64.ld',   '64K SPIFFS', 958448, 0xEB000, 0x10000, 4096)
+		+ flash_size('1M', '1M128', 'eagle.flash.1m128.ld', '128K SPIFFS', 892912, 0xDB000, 0x20000, 4096)
+		+ flash_size('1M', '1M144', 'eagle.flash.1m144.ld', '144K SPIFFS', 876528, 0xD7000, 0x24000, 4096)
+		+ flash_size('1M', '1M160', 'eagle.flash.1m160.ld', '160K SPIFFS', 860144, 0xD3000, 0x28000, 4096)
+		+ flash_size('1M', '1M192', 'eagle.flash.1m192.ld', '192K SPIFFS', 827376, 0xCB000, 0x30000, 4096)
+		+ flash_size('1M', '1M256', 'eagle.flash.1m256.ld', '256K SPIFFS', 761840, 0xBB000, 0x40000, 4096)
+		+ flash_size('1M', '1M512', 'eagle.flash.1m512.ld', '512K SPIFFS', 499696, 0x7B000, 0x80000, 8192)
+		,
+		'2M':
+		  flash_size('2M', '2M', 'eagle.flash.2m.ld', '1M SPIFFS', 1044464, 0x100000,  0xFB000, 8192)
+		,
+		'4M':
+		  flash_size('4M', '4M1M', 'eagle.flash.4m1m.ld', '1M SPIFFS', 1044464, 0x300000,  0xFB000, 8192)
+		+ flash_size('4M', '4M3M', 'eagle.flash.4m.ld',   '3M SPIFFS', 1044464, 0x100000, 0x2FB000, 8192)
+		,  
+		'8M':
+		  flash_size('8M', '8M7M', 'eagle.flash.8m.ld', '7M SPIFFS', 1044464, 0x100000, 0x6FB000, 8192)
+		,
+		'16M':
+		  flash_size('16M', '16M15M', 'eagle.flash.16m.ld', '15M SPIFFS', 1044464, 0x100000, 0x16FB000, 8192)
+		}
+
+macros.update(all_flash_size())
 
 print 'menu.BoardModel=Model'
 print 'menu.UploadSpeed=Upload Speed'
