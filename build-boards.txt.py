@@ -663,6 +663,6 @@ for board in boards:
 		for os in uspeed['os']:
 			speed=uspeed['speed']
 			print short + '.menu.UploadSpeed.' + str(speed) + os + '=' + str(speed)
-			print short + '.menu.UploadSpeed.' + str(speed) + '.upload.speed=' + str(speed)
+			print short + '.menu.UploadSpeed.' + str(speed) + os + '.upload.speed=' + str(speed)
 	
 	print ''
