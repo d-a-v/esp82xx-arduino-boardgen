@@ -27,6 +27,7 @@
 #			crystalfreq/flashfreq_menu:	menus for selection crystal/flash frequency
 #			flashmode_menu:			menus for flashmode selection (dio/dout/qio/qout)
 #			512K/1M/2M/4M/8M/16M:		menus for flashsize / SPIFFS ratio
+#			lwip				menus for lwip available version
 
 boards = [
 	{
@@ -480,49 +481,6 @@ macros = {
 		[ '.build.flash_mode', 'qout' ],
 		],
 
-	####################### debug
-
-	'debug_menu': [
-		[ '.menu.Debug.Disabled', 'Disabled' ],
-		[ '.menu.Debug.Disabled.build.debug_port', '' ],
-		[ '.menu.Debug.Serial', 'Serial' ],
-		[ '.menu.Debug.Serial.build.debug_port', '-DDEBUG_ESP_PORT=Serial' ],
-		[ '.menu.Debug.Serial1', 'Serial1' ],
-		[ '.menu.Debug.Serial1.build.debug_port', '-DDEBUG_ESP_PORT=Serial1' ],
-		[ '.menu.DebugLevel.None____', 'None' ],
-		[ '.menu.DebugLevel.None____.build.debug_level', '' ],
-		[ '.menu.DebugLevel.Core____', 'Core' ],
-		[ '.menu.DebugLevel.Core____.build.debug_level', '-DDEBUG_ESP_CORE' ],
-		[ '.menu.DebugLevel.SSL_____', 'Core + SSL' ],
-		[ '.menu.DebugLevel.SSL_____.build.debug_level', '-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL' ],
-		[ '.menu.DebugLevel.SSL_MEM_', 'Core + SSL + TLS Mem' ],
-		[ '.menu.DebugLevel.SSL_MEM_.build.debug_level', '-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL -DDEBUG_TLS_MEM' ],
-		[ '.menu.DebugLevel.WiFic___', 'Core + WiFi' ],
-		[ '.menu.DebugLevel.WiFic___.build.debug_level', '-DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI' ],
-		[ '.menu.DebugLevel.WiFi____', 'WiFi' ],
-		[ '.menu.DebugLevel.WiFi____.build.debug_level', '-DDEBUG_ESP_WIFI' ],
-		[ '.menu.DebugLevel.HTTPClient', 'HTTPClient' ],
-		[ '.menu.DebugLevel.HTTPClient.build.debug_level', '-DDEBUG_ESP_HTTP_CLIENT' ],
-		[ '.menu.DebugLevel.HTTPClient2', 'HTTPClient + SSL' ],
-		[ '.menu.DebugLevel.HTTPClient2.build.debug_level', '-DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_SSL' ],
-		[ '.menu.DebugLevel.HTTPUpdate', 'HTTPUpdate' ],
-		[ '.menu.DebugLevel.HTTPUpdate.build.debug_level', '-DDEBUG_ESP_HTTP_UPDATE' ],
-		[ '.menu.DebugLevel.HTTPUpdate2', 'HTTPClient + HTTPUpdate' ],
-		[ '.menu.DebugLevel.HTTPUpdate2.build.debug_level', '-DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_UPDATE' ],
-		[ '.menu.DebugLevel.HTTPUpdate3', 'HTTPClient + HTTPUpdate + Updater' ],
-		[ '.menu.DebugLevel.HTTPUpdate3.build.debug_level', '-DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER' ],
-		[ '.menu.DebugLevel.HTTPServer', 'HTTPServer' ],
-		[ '.menu.DebugLevel.HTTPServer.build.debug_level', '-DDEBUG_ESP_HTTP_SERVER' ],
-		[ '.menu.DebugLevel.UPDATER', 'Updater' ],
-		[ '.menu.DebugLevel.UPDATER.build.debug_level', '-DDEBUG_ESP_UPDATER' ],
-		[ '.menu.DebugLevel.OTA_____', 'OTA' ],
-		[ '.menu.DebugLevel.OTA_____.build.debug_level', '-DDEBUG_ESP_OTA' ],
-		[ '.menu.DebugLevel.OTA2____', 'OTA + Updater' ],
-		[ '.menu.DebugLevel.OTA2____.build.debug_level', '-DDEBUG_ESP_OTA -DDEBUG_ESP_UPDATER' ],
-		[ '.menu.DebugLevel.all_____', 'All' ],
-		[ '.menu.DebugLevel.all_____.build.debug_level', '-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_TLS_MEM' ],
-		],
-
 	####################### lwip
 
 	'lwip': [
@@ -559,6 +517,56 @@ uploadspeed = [
 		]
 
 ################################################################
+
+# https://rosettacode.org/wiki/Combinations#Python
+def comb (m, lst):
+    if m == 0: return [[]]
+    return [[x] + suffix for i, x in enumerate(lst) for suffix in comb(m - 1, lst[i + 1:])]
+
+def combn (lst):
+	all = []
+	for i in range(0, len(lst)):
+		all += comb(i + 1, lst)
+	return all
+
+def comb1 (lst):
+	all = []
+	for i in range(0, len(lst)):
+		all += [ [ lst[i] ] ]
+	all += [ lst ]
+	return all
+
+def all_debug ():
+	listcomb = [ 'SSL', 'TLS_MEM', 'HTTP_CLIENT', 'HTTP_SERVER' ]
+	listnocomb = [ 'CORE', 'WIFI', 'HTTP_UPDATE', 'UPDATER', 'OTA' ]
+	options = combn(listcomb)
+	options += comb1(listnocomb)
+	options += [ listcomb + listnocomb ]
+	debugmenu = [
+			[ '.menu.Debug.Disabled', 'Disabled' ],
+			[ '.menu.Debug.Disabled.build.debug_port', '' ],
+			[ '.menu.Debug.Serial', 'Serial' ],
+			[ '.menu.Debug.Serial.build.debug_port', '-DDEBUG_ESP_PORT=Serial' ],
+			[ '.menu.Debug.Serial1', 'Serial1' ],
+			[ '.menu.Debug.Serial1.build.debug_port', '-DDEBUG_ESP_PORT=Serial1' ],
+			[ '.menu.DebugLevel.None____', 'None' ],
+			[ '.menu.DebugLevel.None____.build.debug_level', '' ],
+		]
+	for optlist in options:
+		debugname = ''
+		debugmenuname = ''
+		debugdefs = ''
+		for opt in optlist:
+			debugname += opt;
+			if debugmenuname != '':
+				debugmenuname += '+'
+			debugmenuname += opt
+			debugdefs += ' -DDEBUG_ESP_' + opt
+		debugmenu += [
+			[ '.menu.DebugLevel.' + debugname, debugmenuname ],
+			[ '.menu.DebugLevel.' + debugname + '.build.debug_level', debugdefs ]
+			]
+	return { 'debug_menu': debugmenu }
 
 def flash_size (display, optname, ld, desc, max_upload_size, spiffs_start, spiffs_size, spiffs_blocksize):
 	menu = '.menu.FlashSize.' + optname
@@ -609,7 +617,12 @@ def all_flash_size ():
 		}
 
 macros.update(all_flash_size())
+macros.update(all_debug())
 
+print '#'
+print '# this file is script-generated and is likely to be overwritten'
+print '#'
+print ''
 print 'menu.BoardModel=Model'
 print 'menu.UploadSpeed=Upload Speed'
 print 'menu.CpuFrequency=CPU Frequency'
