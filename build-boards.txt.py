@@ -19,13 +19,14 @@
 #	opts:	specific entries dicts (overrides same entry in macros)
 #	macro:	common entries
 #		unmodifiable parameters:
-#			f_ck/f_nodemcu:			fixed reset method
-#			f_qio/f_dio/f_qout/f_dout:	fixed flash mode
-#			f_512K/f_1M/f_2M/f_4M:		fixed flash size
+#			resetmethod_ck/_nodemcu:	fixed reset method
+#			flashmode_qio/_dio/_qout/_dout:	fixed flash mode
+#			flashfreq_40/_80:		fixed flash frequency
 #		selection menu:
-#			crystalfreq/flashfreq:		menus for selection crystal/flash frequency
-#			flashmode:			menus for flashmode selection (dio/dout/qio/qout)
-#			512K/1M/2M/4M/8M/16M:		menus for code/SPIFFS ratio
+#			resetmethod_menu		
+#			crystalfreq/flashfreq_menu:	menus for selection crystal/flash frequency
+#			flashmode_menu:			menus for flashmode selection (dio/dout/qio/qout)
+#			512K/1M/2M/4M/8M/16M:		menus for flashsize / SPIFFS ratio
 
 boards = [
 	{
@@ -35,9 +36,10 @@ boards = [
 			'.build.board': 'ESP8266_GENERIC',
 			},
 		'macro': [
-			'resetmethod',
-			'crystalfreq', 'flashfreq', 
-			'flashmode',
+			'resetmethod_menu',
+			'crystalfreq_menu',
+			'flashfreq_menu',
+			'flashmode_menu',
 			'512K', '1M', '2M', '4M', '8M', '16M',
 			'lwip',
 			],
@@ -49,10 +51,10 @@ boards = [
 			'.build.board': 'ESP8266_ESP01',
 			},
 		'macro': [
-			'resetmethod',
-			'crystalfreq',
-			'f_dout',
-			'f_ff40',
+			'resetmethod_menu',
+			'crystalfreq_menu',
+			'flashmode_dout',
+			'flashfreq_40',
 			'1M',
 			],
 	},
@@ -64,9 +66,9 @@ boards = [
 			'.build.variant': 'ESPDuino',
 			},
 		'macro': [
-			'f_ck',
-			'f_dio',
-			'f_ff40',
+			'resetmethod_ck',
+			'flashmode_dio',
+			'flashfreq_40',
 			'4M',
 			],
 	},
@@ -78,9 +80,9 @@ boards = [
 			'.build.variant': 'adafruit',
 			},
 		'macro': [
-			'f_nodemcu',
-			'f_qio',
-			'f_ff40',
+			'resetmethod_nodemcu',
+			'flashmode_qio',
+			'flashfreq_40',
 			'4M',
 			],
 	},
@@ -92,10 +94,10 @@ boards = [
 			'.build.variant': 'espresso_lite_v1',
 			},
 		'macro': [
-			'f_dio',
-			'f_ff40',
+			'flashmode_dio',
+			'flashfreq_40',
 			'4M',
-			'resetmethod',
+			'resetmethod_menu',
 			],
 	},
 	{
@@ -106,10 +108,10 @@ boards = [
 			'.build.variant': 'espresso_lite_v2',
 			},
 		'macro': [
-			'f_dio',
-			'f_ff40',
+			'flashmode_dio',
+			'flashfreq_40',
 			'4M',
-			'resetmethod',
+			'resetmethod_menu',
 			],
 	},
 	{
@@ -120,10 +122,10 @@ boards = [
 			'.build.variant': 'phoenix_v1',
 			},
 		'macro': [
-			'f_dio',
-			'f_ff40',
+			'flashmode_dio',
+			'flashfreq_40',
 			'4M',
-			'resetmethod',
+			'resetmethod_menu',
 			],
 	},
 	{
@@ -134,10 +136,10 @@ boards = [
 			'.build.variant': 'phoenix_v2',
 			},
 		'macro': [
-			'f_dio',
-			'f_ff40',
+			'flashmode_dio',
+			'flashfreq_40',
 			'4M',
-			'resetmethod',
+			'resetmethod_menu',
 			],
 	},
 	{
@@ -148,9 +150,9 @@ boards = [
 			'.build.variant': 'nodemcu',
 			},
 		'macro': [
-			'f_nodemcu',
-			'f_qio',
-			'f_ff40',
+			'resetmethod_nodemcu',
+			'flashmode_qio',
+			'flashfreq_40',
 			'4M',
 			],
 	},
@@ -162,9 +164,9 @@ boards = [
 			'.build.variant': 'nodemcu',
 			},
 		'macro': [
-			'f_nodemcu',
-			'f_dio',
-			'f_ff40',
+			'resetmethod_nodemcu',
+			'flashmode_dio',
+			'flashfreq_40',
 			'4M',
 			],
 	},
@@ -175,9 +177,9 @@ boards = [
 			'.build.board': 'MOD_WIFI_ESP8266',
 			},
 		'macro': [
-			'f_ck',
-			'f_qio',
-			'f_ff40',
+			'resetmethod_ck',
+			'flashmode_qio',
+			'flashfreq_40',
 			'2M',
 			],
 	},
@@ -189,9 +191,9 @@ boards = [
 			'.build.variant': 'thing',
 			},
 		'macro': [
-			'f_ck',
-			'f_qio',
-			'f_ff40',
+			'resetmethod_ck',
+			'flashmode_qio',
+			'flashfreq_40',
 			'512K',
 			],
 	},
@@ -203,8 +205,8 @@ boards = [
 			'.build.variant': 'thingdev',
 			},
 		'macro': [
-			'f_nodemcu',
-			'f_dio',
+			'resetmethod_nodemcu',
+			'flashmode_dio',
 			'512K',
 			],
 	},
@@ -215,9 +217,9 @@ boards = [
 			'.build.board': 'ESP8266_ESP210',
 			},
 		'macro': [
-			'f_ck',
-			'f_qio',
-			'f_ff40',
+			'resetmethod_ck',
+			'flashmode_qio',
+			'flashfreq_40',
 			'4M',
 			],
 	},
@@ -229,9 +231,9 @@ boards = [
 			'.build.variant': 'd1_mini',
 			},
 		'macro': [
-			'f_nodemcu',
-			'f_dio',
-			'f_ff40',
+			'resetmethod_nodemcu',
+			'flashmode_dio',
+			'flashfreq_40',
 			'4M',
 			],
 	},
@@ -242,9 +244,9 @@ boards = [
 			'.build.board': 'ESP8266_WEMOS_D1MINILITE',
 			},
 		'macro': [
-			'f_nodemcu',
-			'f_dout',
-			'f_ff40',
+			'resetmethod_nodemcu',
+			'flashmode_dout',
+			'flashfreq_40',
 			'1M',
 			],
 	},
@@ -256,9 +258,9 @@ boards = [
 			'.build.variant': 'd1',
 			},
 		'macro': [
-			'f_nodemcu',
-			'f_dio',
-			'f_ff40',
+			'resetmethod_nodemcu',
+			'flashmode_dio',
+			'flashfreq_40',
 			'4M',
 			],
 	},
@@ -270,10 +272,10 @@ boards = [
 			'.build.variant': 'espino',
 			},
 		'macro': [
-			'f_qio',
-			'f_ff40',
+			'flashmode_qio',
+			'flashfreq_40',
 			'4M',
-			'resetmethod',
+			'resetmethod_menu',
 			]
 	},
 	{
@@ -284,9 +286,9 @@ boards = [
 			'.build.variant': 'espinotee',
 			},
 		'macro': [
-			'f_nodemcu',
-			'f_qio',
-			'f_ff40',
+			'resetmethod_nodemcu',
+			'flashmode_qio',
+			'flashfreq_40',
 			'4M',
 			],
 	},
@@ -315,9 +317,9 @@ boards = [
 			'.menu.ESPModule.ESP12.upload.maximum_size': '1044464',
 			},
 		'macro': [
-			'f_qio',
-			'flashfreq',
-			'f_ff40',
+			'flashmode_qio',
+			'flashfreq_menu',
+			'flashfreq_40',
 			'1M',
 			]
 	},
@@ -340,8 +342,8 @@ boards = [
 			'.menu.BoardModel.starottodeved.build.extra_flags': '-DF_CRYSTAL=40000000',
 			},
 		'macro': [
-			'f_qio',
-			'f_ff40',
+			'flashmode_qio',
+			'flashfreq_40',
 			'4M',
 			],
 	},
@@ -353,8 +355,8 @@ boards = [
 			'.build.f_cpu': '160000000L',
 			},
 		'macro': [
-			'f_qio',
-			'f_ff80',
+			'flashmode_qio',
+			'flashfreq_80',
 			'512K',
 			],
 	},
@@ -367,8 +369,8 @@ boards = [
 			'.upload.maximum_size': '1040368',
 			},
 		'macro': [
-			'f_dio',
-			'f_ff40',
+			'flashmode_dio',
+			'flashfreq_40',
 			'4M',
 			],
 	},
@@ -385,7 +387,7 @@ macros = {
 		[ '.serial.disableDTR', 'true' ],
 		[ '.serial.disableRTS', 'true' ],
 		[ '.build.mcu', 'esp8266' ],
-		[ '.build.f_cpu', '80000000L' ],
+#useless	[ '.build.f_cpu', '80000000L' ],
 		[ '.build.core', 'esp8266' ],
 		[ '.build.variant', 'generic' ],
 		[ '.build.spiffs_pagesize', '256' ],
@@ -400,37 +402,37 @@ macros = {
 
 	#######################
 
-	'cpufreq': [
+	'cpufreq_menu': [
 		[ '.menu.CpuFrequency.80', '80 MHz' ],
 		[ '.menu.CpuFrequency.80.build.f_cpu', '80000000L' ],
 		[ '.menu.CpuFrequency.160', '160 MHz' ],
 		[ '.menu.CpuFrequency.160.build.f_cpu', '160000000L' ],
 		],
 	
-	'crystalfreq': [
+	'crystalfreq_menu': [
 		[ '.menu.CrystalFreq.26', '26 MHz' ],
 		[ '.menu.CrystalFreq.40', '40 MHz' ],
 		[ '.menu.CrystalFreq.40.build.extra_flags', '-DF_CRYSTAL=40000000' ],
 		],
 		
-	'flashfreq': [
+	'flashfreq_menu': [
 		[ '.menu.FlashFreq.40', '40MHz' ],
 		[ '.menu.FlashFreq.40.build.flash_freq', '40' ],
 		[ '.menu.FlashFreq.80', '80MHz' ],
 		[ '.menu.FlashFreq.80.build.flash_freq', '80' ],
 		],
 		
-	'f_ff40': [
+	'flashfreq_40': [
 		[ '.build.flash_freq', '40' ],
 		],
 
-	'f_ff80': [
+	'flashfreq_80': [
 		[ '.build.flash_freq', '80' ],
 		],
 
 	####################### menu.resetmethod
 	
-	'resetmethod': [
+	'resetmethod_menu': [
 		[ '.menu.ResetMethod.ck', 'ck' ],
 		[ '.menu.ResetMethod.ck.upload.resetmethod', 'ck' ],
 		[ '.menu.ResetMethod.nodemcu', 'nodemcu' ],
@@ -439,17 +441,17 @@ macros = {
 	
 	####################### upload.resetmethod
 	
-	'f_ck': [
+	'resetmethod_ck': [
 		[ '.upload.resetmethod', 'ck' ],
 		],
 	
-	'f_nodemcu': [
+	'resetmethod_nodemcu': [
 		[ '.upload.resetmethod', 'nodemcu' ],
 		],
 
 	####################### menu.FlashMode
 	
-	'flashmode': [
+	'flashmode_menu': [
 		[ '.menu.FlashMode.qio', 'QIO' ],
 		[ '.menu.FlashMode.qio.build.flash_mode', 'qio' ],
 		[ '.menu.FlashMode.qout', 'QOUT' ],
@@ -462,25 +464,25 @@ macros = {
 
 	####################### default flash_mode
 	
-	'f_dio': [
+	'flashmode_dio': [
 		[ '.build.flash_mode', 'dio' ],
 		],
 
-	'f_qio': [
+	'flashmode_qio': [
 		[ '.build.flash_mode', 'qio' ],
 		],
 
-	'f_dout': [
+	'flashmode_dout': [
 		[ '.build.flash_mode', 'dout' ],
 		],
 
-	'f_qout': [
+	'flashmode_qout': [
 		[ '.build.flash_mode', 'qout' ],
 		],
 
 	####################### debug
 
-	'debug': [
+	'debug_menu': [
 		[ '.menu.Debug.Disabled', 'Disabled' ],
 		[ '.menu.Debug.Disabled.build.debug_port', '' ],
 		[ '.menu.Debug.Serial', 'Serial' ],
@@ -521,7 +523,7 @@ macros = {
 		[ '.menu.DebugLevel.all_____.build.debug_level', '-DDEBUG_ESP_CORE -DDEBUG_ESP_SSL -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_TLS_MEM' ],
 		],
 
-	####################### debug
+	####################### lwip
 
 	'lwip': [
 # lwip2:
@@ -634,10 +636,10 @@ for board in boards:
 			print short + opt + '=' + board['opts'][opt]
 	
 	# macros
-	macrolist = [ 'defaults', 'cpufreq', ]
+	macrolist = [ 'defaults', 'cpufreq_menu', ]
 	if 'macro' in board:
 		macrolist += board['macro']
-	macrolist += [ 'debug' ]
+	macrolist += [ 'debug_menu' ]
 	for block in macrolist:
 		for keyval in macros[block]:
 			if not ('opts' in board) or not (keyval[0] in board['opts']):
